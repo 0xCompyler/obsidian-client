@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import AuthProvider from "@contexts/Auth/AuthProvider";
+import Create from "@pages/Create";
+import Landing from "@pages/Landing";
+import NotFound from "@pages/NotFound";
+import React from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import {
+	BrowserRouter as Router,
+	Switch,
+	Route,
+} from "react-router-dom";
+
+const App = () => {
+	return (
+		<AuthProvider>
+			<Router>
+				<Switch>
+					<Route
+						path="/"
+						exact
+						component={Landing}
+					/>
+					<Route
+						path="/create"
+						exact
+						component={Create}
+					/>
+					<Route
+						path="*"
+						component={NotFound}
+					/>
+				</Switch>
+			</Router>
+		</AuthProvider>
+	)
 }
 
-export default App;
+export default App
