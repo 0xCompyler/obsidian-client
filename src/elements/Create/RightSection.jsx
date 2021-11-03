@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { LazyMotion, domAnimation, m } from "framer-motion"
-import Loading from "@elements/Default/Loading";
 import CreditsSection from "./CreditsSection";
 import TimeSpanSection from "./TimeSpanSection";
 import DateSection from "./DateSection";
+import Axios from "axios";
+import FileContext from "@contexts/File/FileContext";
 
 const Btn = styled(m.a)`
 	width: 75%;
@@ -56,16 +57,62 @@ const AnimBtn = ({ children, onClick,disabled }) => (
 const RightSection = () => {
 	const [buttonText, setButtonText] = useState("Create Course")
 	const [isSubmitting, setIsSubmitting] = useState(false)
-
+	const { files } = useContext(FileContext)
+	const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTgxOGJhMjM2NjUwYjNhMjRhZDA0NDciLCJpYXQiOjE2MzU4Nzk4NTV9.fz99BSQHtwaChNLsmrNf-_ItJpnx8Ua9EI3g6M-OAMU"
 	const handleClick = () => {
-		localStorage.removeItem("properties")
-		setButtonText(<Loading/>)
 		setIsSubmitting(true)
-		setButtonText("Create Course")
-		setTimeout(() => {
-			setIsSubmitting(false)
-		}, 1000);
-	}
+		if (files.file) {
+			const fData = new FormData();
+			fData.append("course_code", files.courseCode);
+			fData.append("file_obj", files.file);
+
+			var config = {
+				method: "post",
+				url: `${process.env.REACT_APP_FASTAPI_URL}/CreateCourse`,
+				data: fData,
+			};
+			setButtonText("Submitting...")
+			Axios(config)
+				.then((res) => {
+					Axios.post(
+						`${process.env.REACT_APP_SERVER_URL}/teacher/initiateCourse`,{
+							_id:files.courseCode,
+							name:files.courseName,
+							handout:res.data.url,
+							credits: files.credits,
+							from:files.timeSpan.start,
+							to:files.timeSpan.end
+						},
+						{
+							headers: {
+								Authorization: "Bearer " + token,
+							},
+						}
+					)
+						.then((res) => {
+							// console.log(res.data);
+							setIsSubmitting(false);
+							window.alert(res.data.message);
+						})
+						.catch((err) => {
+							window.alert("Network error");
+							setIsSubmitting(false);
+							console.log(err);
+						});
+				})
+				.catch((err) => {
+					console.log(err);
+				})
+				.finally(()=>{
+					setButtonText("Create Course")
+					setTimeout(() => {
+						setIsSubmitting(false)
+					}, 1000);
+				})
+		} else {
+			console.log("No formdata");
+		}
+	};
 
 	return (
 		<Wrapper>
@@ -75,7 +122,7 @@ const RightSection = () => {
 				<TimeSpanSection/>
 			</Group>
 			<LazyMotion features={domAnimation}>
-				<AnimBtn disabled={(isSubmitting)?true:false} onClick={handleClick}>{buttonText}</AnimBtn>
+				<AnimBtn onClick={handleClick} disabled={(isSubmitting)?true:false}>{buttonText}</AnimBtn>
 			</LazyMotion>
 		</Wrapper>
 	)

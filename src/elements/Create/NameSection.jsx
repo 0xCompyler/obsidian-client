@@ -38,6 +38,7 @@ const NameSection = () => {
 		<Container>
 			<Title>Course Name</Title>
 			<InputContainer
+				type="text"
 				value={files.courseName}
 				onChange = {handleInput}
 				placeholder={`e.g “Design and Analysis of Algorithms”`}

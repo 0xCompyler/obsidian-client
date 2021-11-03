@@ -3,7 +3,6 @@ export const initialState = {
 		courseCode:"",
 		courseName:"",
 		file:null,
-		coverFile:null,
 		credits:"",
 		timeSpan:{
 			start:"",
