@@ -3,14 +3,14 @@ export const reducer = (state, action) => {
 		case "LOGIN":
 			return {
 				...state,
-				auth: action.payload.auth,
+				user: action.payload.user,
 				token: action.payload.token,
 			};
 		case "LOGOUT":
 			return {
 				...state,
 				token: null,
-				auth: null,
+				user: null,
 			};
 		default:
 			throw new Error(`Unhandled action type: ${action.type}`);

@@ -1,4 +1,8 @@
-import AuthProvider from "@contexts/Auth/AuthProvider";
+import StudentDashboard from "@components/Student/StudentDashboard";
+import TeacherDashboard from "@components/Teacher/TeacherDashboard";
+import Login from "@components/Login";
+import Signup from "@components/Signup";
+import UserProvider from "@contexts/User/UserProvider";
 import Create from "@pages/Create";
 import Landing from "@pages/Landing";
 import NotFound from "@pages/NotFound";
@@ -12,7 +16,7 @@ import {
 
 const App = () => {
 	return (
-		<AuthProvider>
+		<UserProvider>
 			<Router>
 				<Switch>
 					<Route
@@ -20,6 +24,20 @@ const App = () => {
 						exact
 						component={Landing}
 					/>
+					<Route
+						component={StudentDashboard}
+						path="/student"
+					/>
+					<Route
+						component={TeacherDashboard}
+						path="/teacher"
+					/>
+					<Route path="/login">
+						<Login />
+					</Route>
+					<Route path="/signup">
+						<Signup />
+					</Route>
 					<Route
 						path="/create"
 						exact
@@ -31,7 +49,7 @@ const App = () => {
 					/>
 				</Switch>
 			</Router>
-		</AuthProvider>
+		</UserProvider>
 	)
 }
 
