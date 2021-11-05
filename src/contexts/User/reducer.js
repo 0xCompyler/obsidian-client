@@ -12,6 +12,11 @@ export const reducer = (state, action) => {
 				token: null,
 				user: null,
 			};
+		case "UPDATED_USER":
+			return{
+				...state,
+				user:action.payload.user,
+			}
 		default:
 			throw new Error(`Unhandled action type: ${action.type}`);
 	}

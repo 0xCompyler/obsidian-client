@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext,useEffect } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import LoginIcon from "@static/svg/LoginIcon";
@@ -266,6 +266,18 @@ const Homepage = () => {
 	const [password, setPassword] = useState("");
 	const [, setErrors] = useState([]);
 
+	useEffect(() => {
+		if(user && user.type === "student"){
+			history.push("/student");
+		}
+		else if(user && user.type === "teacher"){
+			history.push("/teacher");
+		}
+		else{
+			return;
+		}
+	},[])
+
 	const loginTeacher = () => {
 		Axios.post(`${nodeApiUrl}teacher/signin`, {
 			email,
@@ -283,7 +295,12 @@ const Homepage = () => {
 					user: teacher,
 				});
 
-				history.push("/teacher");
+				if(res.data.teacher.course){
+					history.push("/teacher");
+				}
+				else{
+					history.push("/create");
+				}
 			})
 			.catch((err) => {
 				//Todo instead add Toast

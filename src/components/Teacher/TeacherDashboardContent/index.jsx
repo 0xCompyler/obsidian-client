@@ -108,12 +108,11 @@ const Loader = () => {
 	)
 };
 
-const AssignmentsNotices = () => {
+const AssignmentsNotices = ({history}) => {
 	const [loading, setLoading] = useState(true);
 	// eslint-disable-next-line
 	const [teacher, setTeacher] = useState({});
 	const [assignments, setAssignments] = useState([]);
-	const [notices, setNotices] = useState([]);
 
 	let ongoingAssignments = [];
 	let completedAssignments = [];
@@ -130,9 +129,16 @@ const AssignmentsNotices = () => {
 	}
 
 	const nodeApiUrl = process.env.REACT_APP_NODE_API_URL;
-	const { token } = useContext(UserContext);
+	const { token,user } = useContext(UserContext);
 
 	useEffect(() => {
+		console.log(user,"Course");
+		if(!token){
+			history.push("/login");
+		}
+		if(!user.course){
+			history.push("/create");
+		}
 		Axios.get(`${nodeApiUrl}teacher/getTeacher`, {
 			headers: {
 				Authorization: "Bearer " + token,
@@ -140,9 +146,7 @@ const AssignmentsNotices = () => {
 		}).then((res) => {
 			setLoading(false);
 			setTeacher(res.data.response);
-			// console.log(res.data);
 			setAssignments(res.data.response.assignments);
-			setNotices(res.data.response.notices);
 		}).catch((err) => {
 			window.alert("Network error");
 		});
@@ -176,7 +180,7 @@ const AssignmentsNotices = () => {
 							)
 						}
 					</AssignmentsContainer>
-					<NoticesContainer>
+					{/* <NoticesContainer>
 						<Heading>Notices</Heading>
 						<Flexbreak />
 						{
@@ -186,17 +190,17 @@ const AssignmentsNotices = () => {
 								<Heading message={true}>No notices have been uploaded yet! </Heading>
 							)
 						}
-					</NoticesContainer>
+					</NoticesContainer> */}
 				</>
 			)}
 		</>
 	);
 };
 
-const TeacherDashboardContent = () => {
+const TeacherDashboardContent = ({history}) => {
 	return (
 		<Container>
-			<AssignmentsNotices />
+			<AssignmentsNotices history={history}/>
 		</Container>
 	);
 };

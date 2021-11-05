@@ -13,6 +13,7 @@ import {
 	Switch,
 	Route,
 } from "react-router-dom";
+import PrivateRoute from "@components/Private";
 
 const App = () => {
 	return (
@@ -24,11 +25,11 @@ const App = () => {
 						exact
 						component={Landing}
 					/>
-					<Route
+					<PrivateRoute
 						component={StudentDashboard}
 						path="/student"
 					/>
-					<Route
+					<PrivateRoute
 						component={TeacherDashboard}
 						path="/teacher"
 					/>
