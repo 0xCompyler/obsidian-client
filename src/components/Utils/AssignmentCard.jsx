@@ -135,15 +135,12 @@ const AssignmentCard = ({assignments,students,modal,submissions}) => {
 								{`${item.assignment}`}
 							</DescriptionText>
 						</Description>
-						
 							<Description theme={(index % 2 !== 0) && `primary`} noBorderRadius>
 								<DescriptionIcon/>
 								<DescriptionText theme={(index % 2 !== 0) && `primary`} notUnderlined>
 									Submitted on: {item.dateSubmitted.substring(0, 10)}
 								</DescriptionText>
 							</Description>
-
-						
                             <AssignedBy>
                                 <AssignmentIndIcon />
                                 <AssignedByText>
@@ -152,7 +149,7 @@ const AssignmentCard = ({assignments,students,modal,submissions}) => {
                             </AssignedBy>
 
 					</Content>
-				</Card>				
+				</Card>
 					) : (
 
 				<Card modal={modal} key={index} onClick ={()=>onClickHandler(item)}>

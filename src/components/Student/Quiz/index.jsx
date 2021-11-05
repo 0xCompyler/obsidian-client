@@ -49,25 +49,25 @@ const TextInput = styled.input`
 	padding: 0.75rem 1rem;
 	margin: 2rem;
 	border-radius:10px;
-	border: 3px solid #249BD4;
-	background: #DEF7FF;
+	border: 2px solid var(--app-container-text-primary);
+	background: var(--app-container-bg-primary);
 	outline:none;
 	font-size:1rem;
 	font-weight: 700;
-	color: #41454a;
+	color: var(--app-text);
 `
 
 const SubmitBtn = styled.button`
 	display:flex;
 	align-items:center;
-	padding: 0.75rem 1rem;
-	border-radius:10px;
+	padding: 0.75rem 1.25rem;
 	text-transform: uppercase;
 	font-size: 1rem;
 	font-weight: 700;
-	border: 3px solid #69ff80;
-    background: #1b2c30;
-	color: #69ff80;
+	border: none;
+    border-radius: 1000rem;
+	background: var(--app-theme-primary);
+	color: var(--app-text);
 	outline:none;
 `
 

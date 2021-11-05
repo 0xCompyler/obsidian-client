@@ -54,28 +54,27 @@ const TextInput = styled.input`
 	padding: 0.75rem 1rem;
 	margin: 1rem 2rem 1rem 0;
 	border-radius: 10px;
-	border: 3px solid #249bd4;
-	background: #def7ff;
+	border: 2px solid var(--app-container-text-primary);
+	background: var(--app-container-bg-primary);
 	outline: none;
 	font-size: 1rem;
 	font-weight: 700;
-	color: #41454a;
+	color: var(--app-text);
 `;
 
 const SubmitBtn = styled.button`
-	display: flex;
-	align-items: center;
-	justify-content:center;
-	padding: 0.75rem 1rem;
-	border-radius: 10px;
+	display:flex;
+	align-items:center;
+	padding: 0.75rem 1.25rem;
 	text-transform: uppercase;
 	font-size: 1rem;
 	font-weight: 700;
-	outline: none;
-	border: 3px solid #69ff80;
-    background: #1b2c30;
-	color: #69ff80;
-`;
+	border: none;
+    border-radius: 1000rem;
+	background: var(--app-theme-primary);
+	color: var(--app-text);
+	outline:none;
+`
 
 const CloseButton = styled.button`
 	display: flex;
@@ -235,12 +234,12 @@ const Select = styled.select`
 	padding: 0.75rem 1rem;
 	margin: 2rem;
 	border-radius: 10px;
-	border: 3px solid #249bd4;
-	background: #def7ff;
+	border: 2px solid var(--app-container-text-primary);
+	background: var(--app-container-bg-primary);
 	outline: none;
 	font-size: 1rem;
 	font-weight: 700;
-	color: #41454a;
+	color: var(--app-text);
 `;
 
 const Option = styled.option`

@@ -74,7 +74,7 @@ const PrimaryButton = styled(Button)`
 	width: 100%;
 	margin: 0 0 2rem 0;
 	&:hover {
-		background: #dceeff;
+		background: var(--app-theme-primary-disabled);
 	}
 	@media (max-width: 1224px) {
 		margin: 2rem 1rem 1rem;
@@ -151,7 +151,7 @@ const Text = styled.div`
 		left: 0;
 		right: 0;
 		bottom: 0;
-		background-color: #ccc;
+		background-color: var(--app-container-text-primary);
 		-webkit-transition: 0.4s;
 		transition: 0.4s;
 	}

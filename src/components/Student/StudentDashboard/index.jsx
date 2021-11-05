@@ -357,7 +357,7 @@ const StudentDashboard = () => {
 							isTabletOrMobile
 								? `sidepanel ${
 										!isSidepanelOpen ? `closed` : ``
-								  }`
+								}`
 								: `sidepanel`
 						}>
 						<SidePanelMember
