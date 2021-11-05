@@ -16,7 +16,7 @@ const Wrapper = styled.div`
 		width: 100%;
 		height: 10rem;
 		background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='16' ry='16' stroke='%23787987FF' stroke-width='4' stroke-dasharray='6%2c 12' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
-	border-radius: 16px;
+		border-radius: 16px;
 		outline:none;
 		@media (max-width: 1224px){}
 	}
@@ -45,7 +45,11 @@ const DropzoneButton = styled(m.a)`
 	border: none;
 	cursor: pointer;
 	z-index:2;
+	text-decoration: none;
 	user-select:none;
+	&:hover{
+		color : inherit;
+	}
 `
 
 const Dropzone = (props) => {

@@ -1,5 +1,5 @@
 import { createContext } from "react";
 import { initialState } from "./initialState";
-const AuthContext = createContext(initialState);
+const UserContext = createContext(initialState);
 
-export default AuthContext;
+export default UserContext;
