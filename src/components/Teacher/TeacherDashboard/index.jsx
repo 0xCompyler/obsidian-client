@@ -320,7 +320,7 @@ const StyledUploadIcon = styled(CloudUploadIcon)`
 	}
 `;
 
-const TeacherDashboard = () => {
+const TeacherDashboard = (props) => {
 	const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
 	const [isSidepanelOpen, setIsSidepanelOpen] = useState(false);
 	// eslint-disable-next-line
@@ -448,7 +448,7 @@ const TeacherDashboard = () => {
 								<Notices />
 							</Route>
 							<Route path="/teacher/">
-								<TeacherDashboardContent />
+								<TeacherDashboardContent history={props.history}/>
 							</Route>
 						</Switch>
 					</div>

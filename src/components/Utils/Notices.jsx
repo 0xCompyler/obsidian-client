@@ -59,7 +59,7 @@ const truncate = (text) => {
 }
     return (
         <>
-            {notices.map((item,index) => (
+            {/* {notices.map((item,index) => (
 				<Notice key={index}>
 					<NoticeTitle>
 						{item.title}
@@ -79,7 +79,7 @@ const truncate = (text) => {
 					) : null}
 				</Notice>
 			))
-			}
+			} */}
         </>
     )
 }

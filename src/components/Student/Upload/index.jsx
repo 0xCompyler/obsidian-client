@@ -143,7 +143,7 @@ const TextWrapper = styled.div`
 `;
 
 const Upload = () => {
-	const apiUrl = process.env.REACT_APP_FLASK_API_URL;
+	const apiUrl = process.env.REACT_APP_FASTAPI_URL;
 	const nodeApiUrl = process.env.REACT_APP_NODE_API_URL;
 	const { token } = useContext(UserContext);
 	const [files, setFiles] = useState(null);
@@ -155,13 +155,13 @@ const Upload = () => {
 	const getResults = () => {
 		if (files) {
 			const fData = new FormData();
-			fData.append("subject", title);
-			fData.append("doc", files[0]);
+			fData.append("assignment_id",1);
+			fData.append("file_obj", files[0]);
 			console.log(files[0], "file");
 
 			var config = {
 				method: "post",
-				url: `${apiUrl}/assignment/upload/question`,
+				url: `${apiUrl}/assignment/question/upload`,
 				data: fData,
 			};
 

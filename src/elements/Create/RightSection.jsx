@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState,useEffect } from "react";
 import styled from "styled-components";
 import { LazyMotion, domAnimation, m } from "framer-motion"
 import CreditsSection from "./CreditsSection";
@@ -6,6 +6,8 @@ import TimeSpanSection from "./TimeSpanSection";
 import DateSection from "./DateSection";
 import Axios from "axios";
 import FileContext from "@contexts/File/FileContext";
+import { useHistory } from "react-router-dom";
+import UserContext from "@contexts/User/UserContext";
 
 const Btn = styled(m.a)`
 	width: 75%;
@@ -55,10 +57,19 @@ const AnimBtn = ({ children, onClick,disabled }) => (
 )
 
 const RightSection = () => {
+	const history = useHistory();
 	const [buttonText, setButtonText] = useState("Create Course")
 	const [isSubmitting, setIsSubmitting] = useState(false)
 	const { files } = useContext(FileContext)
-	const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTgxOGJhMjM2NjUwYjNhMjRhZDA0NDciLCJpYXQiOjE2MzU4Nzk4NTV9.fz99BSQHtwaChNLsmrNf-_ItJpnx8Ua9EI3g6M-OAMU"
+	const {saveUpdatedUser} = useContext(UserContext);
+	const {user,token} = useContext(UserContext);
+
+	useEffect(() => {
+		if(user.course){
+			history.push("/teacher");
+		}
+	},[])
+
 	const handleClick = () => {
 		setIsSubmitting(true)
 		if (files.file) {
@@ -75,7 +86,7 @@ const RightSection = () => {
 			Axios(config)
 				.then((res) => {
 					Axios.post(
-						`${process.env.REACT_APP_SERVER_URL}/teacher/initiateCourse`,{
+						`${process.env.REACT_APP_NODE_API_URL}teacher/initiateCourse`,{
 							_id:files.courseCode,
 							name:files.courseName,
 							handout:res.data.url,
@@ -90,6 +101,11 @@ const RightSection = () => {
 						}
 					)
 						.then((res) => {
+							localStorage.setItem("user", JSON.stringify(res.data.response));
+							saveUpdatedUser({
+								user:res.data.response
+							})
+							history.push("/teacher");
 							// console.log(res.data);
 							setIsSubmitting(false);
 							window.alert(res.data.message);
