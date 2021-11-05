@@ -20,6 +20,13 @@ const UserProvider = (props) => {
 		});
 	};
 
+	const saveUpdatedUser = (userData) => {
+		dispatch({
+			type:"UPDATED_USER",
+			payload:userData
+		})
+	}
+
 	return (
 		<UserContext.Provider
 			value={{
@@ -27,6 +34,7 @@ const UserProvider = (props) => {
 				token: state.token,
 				login,
 				logout,
+				saveUpdatedUser
 			}}>
 			{props.children}
 		</UserContext.Provider>
