@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import styled from "styled-components";
 import Dropzone from "react-dropzone";
 import AssignmentRoundedIcon from '@material-ui/icons/AssignmentRounded';
 import Axios from "axios";
+import UserContext from "../../contexts/User/UserContext"
 
 const Container = styled.div`
 	display:flex;
@@ -117,9 +118,10 @@ const ModalBodyStudent = (props) => {
 	console.log(props,"assignment");
 	const date = new Date(props.deadline);
 	const [files, setFiles] = useState(null);
+	const {user} = useContext(UserContext);
 
 	//Upload functionality
-	const apiUrl = process.env.REACT_APP_FLASK_API_URL;
+	const apiUrl = process.env.REACT_APP_FASTAPI_URL;
 	const nodeApiUrl = process.env.REACT_APP_NODE_API_URL;
 	const jwtToken = localStorage.getItem("token");
 
@@ -127,14 +129,14 @@ const ModalBodyStudent = (props) => {
 		console.log("in")
 		if (files) {
 			const fData = new FormData();
-			fData.append("subject",props.title);
-			fData.append("tag",(props.assignmentGiven.split("/").pop()).split(".")[0]);
-			fData.append("doc",files[0]);
-			console.log(files[0],"file");
+			fData.append("course_code",props.courseCode);
+			fData.append("file_obj",files[0]);
+			fData.append("assignment_id",props.assignmentId);
+			fData.append("roll_no",user._id);
 
 			var config = {
 				method:"post",
-				url:`${apiUrl}/assignment/upload/answer`,
+				url:`${apiUrl}/assignment/answer/upload`,
 				data:fData
 			}
 

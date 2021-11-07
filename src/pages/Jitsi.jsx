@@ -29,6 +29,10 @@ const Jitsi = () => {
       parentNode: document.getElementById(jitsiContainerId)
     });
 
+    const testArray = _jitsi.getParticipantsInfo();
+
+    console.log(testArray,"test");
+
     setJitsi(_jitsi);
   };
 

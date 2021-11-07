@@ -16,6 +16,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import { Switch, Route, NavLink } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import UserContext from "../../../contexts/User/UserContext";
+import Test from "./Test";
 
 const Wrapper = styled.div`
 	position: absolute;
@@ -391,7 +392,7 @@ const StudentDashboard = () => {
 								<Upload />
 							</Route>
 							<Route path="/student/">
-								<StudentDashboardContent />
+								<Test />
 							</Route>
 						</Switch>
 					</div>

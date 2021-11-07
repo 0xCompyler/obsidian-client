@@ -146,7 +146,7 @@ const TextWrapper = styled.div`
 const Upload = () => {
 	const apiUrl = process.env.REACT_APP_FASTAPI_URL;
 	const nodeApiUrl = process.env.REACT_APP_NODE_API_URL;
-	const { token } = useContext(UserContext);
+	const { token,user} = useContext(UserContext);
 	const [files, setFiles] = useState(null);
 	const [title, setTitle] = useState("");
 	const [desc, setDesc] = useState("");
@@ -156,13 +156,16 @@ const Upload = () => {
 	const getResults = () => {
 		if (files) {
 			const fData = new FormData();
+			//!Todo Make dynamic
+			fData.append("course_code","CS2102")
 			fData.append("assignment_id",1);
 			fData.append("file_obj", files[0]);
+			fData.append("roll_no",user._id);
 			console.log(files[0], "file");
 
 			var config = {
 				method: "post",
-				url: `${apiUrl}/assignment/question/upload`,
+				url: `${apiUrl}/assignment/answer/upload`,
 				data: fData,
 			};
 
@@ -170,9 +173,8 @@ const Upload = () => {
 
 			Axios(config)
 				.then((res) => {
-					// console.log(res.data.url, "ok");
 					Axios.post(
-						`${nodeApiUrl}teacher/uploadAssignment`,
+						`${nodeApiUrl}student/submitAssignment`,
 						{
 							title,
 							description: desc,

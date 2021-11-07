@@ -4,6 +4,7 @@ import Login from "@components/Login";
 import Signup from "@components/Signup";
 import UserProvider from "@contexts/User/UserProvider";
 import Create from "@pages/Create";
+import Jitsi from "@pages/Jitsi";
 import Landing from "@pages/Landing";
 import NotFound from "@pages/NotFound";
 import React from "react";
@@ -43,6 +44,11 @@ const App = () => {
 						path="/create"
 						exact
 						component={Create}
+					/>
+					<Route
+						path="/jitsi"
+						exact
+						component={Jitsi}
 					/>
 					<Route
 						path="*"
