@@ -8,11 +8,12 @@ const CardContainer = styled.div`
 	display: flex;
 	align-items:center;
 	justify-content:space-between;
-	padding: 1.25rem 1.75rem;
+	padding: 1.75rem;
 	background: var(--app-container-bg-primary);
 	border-radius: 0.5rem;
 	gap: 1rem;
-	max-width: 24rem;
+	max-width: 30%;
+	min-width: 30%;
 	cursor: pointer;
 	& > div{
 		display: flex;

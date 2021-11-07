@@ -8,7 +8,7 @@ import BlockIcon from '@material-ui/icons/Block';
 const Wrapper = styled.div`
 	display: grid;
 	grid-template-columns: repeat(2,minmax(0,1fr));
-	gap: 1rem;
+	gap: 2rem;
 `
 
 const Container = styled.section`
@@ -115,6 +115,14 @@ const Graph2 = () => {
 	)
 }
 
+const Heading = styled.h1`
+	flex: 1;
+	font-size: 1.5rem !important;
+	font-weight: 900;
+	color: #d6d6d6;
+	padding-bottom: 2rem;
+`
+
 const Cards = () => {
 	const cardData = [{
 		name:"name 1",
@@ -153,7 +161,8 @@ const Graphs = () => {
 	},[])
 	return(
 		<Container>
-			<Cards/>
+			{/* <Cards/> */}
+			<Heading>Graphs</Heading>
 			<Wrapper>
 				<GraphContainer>
 					<Graph1/>

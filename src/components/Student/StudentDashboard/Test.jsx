@@ -4,6 +4,8 @@ import styled from "styled-components";
 import Axios from "axios";
 import UserContext from "../../../contexts/User/UserContext";
 import AssignmentCard from "../../../components/Utils/AssignmentCard";
+import Classes from "./Classes";
+import Graphs from "../Graphs";
 
 const Container = styled.div`
 	display: flex;
@@ -26,22 +28,25 @@ const Container = styled.div`
 	}
 `;
 
-const AssignmentsContainer = styled.div`
-	flex: 1 1 auto;
+const Wrapper = styled.section`
 	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
-	justify-content: center;
+	flex-direction: column;
 	width: 100%;
-	gap: 1rem;
+	padding: 2rem;
+`
+
+const AssignmentsContainer = styled.div`
+	display: flex;
+	gap: 2rem;
+	flex-wrap: wrap;
 `;
 
 const Heading = styled.h1`
 	flex: 1;
 	font-size: 1.5rem !important;
 	font-weight: 900;
-	margin: 0 2rem !important;
 	color: #d6d6d6;
+	padding-bottom: 2rem;
 `;
 
 const Flexbreak = styled.div`
@@ -85,16 +90,18 @@ const AssignmentsNotices = () => {
 
 	return (
 		<>
-			<AssignmentsContainer>
+			<Classes/>
+			<Wrapper>
 				{ongoingAssignments.length > 0 && (
 					<Heading>Ongoing Assignments</Heading>
 				)}
-				<Flexbreak />
-				<AssignmentCard
-					assignments={ongoingAssignments}
-					students={true}
-				/>
-			</AssignmentsContainer>
+				<AssignmentsContainer>
+					<AssignmentCard
+						assignments={ongoingAssignments}
+						students={true}
+					/>
+				</AssignmentsContainer>
+			</Wrapper>
 			<AssignmentsContainer>
 				{completedAssignments.length > 0 && (
 					<Heading>Completed Assignments</Heading>
@@ -105,6 +112,7 @@ const AssignmentsNotices = () => {
 					students={true}
 				/>
 			</AssignmentsContainer>
+			<Graphs/>
 		</>
 	);
 };
