@@ -33,20 +33,14 @@ const AssignmentsContainer = styled.div`
 	align-items: center;
 	justify-content: center;
 	width: 100%;
-`;
-
-const NoticesContainer = styled.div`
-	flex: 1 1 auto;
-	display: flex;
-	flex-wrap: wrap;
-	width: 100%;
+	gap: 1rem;
 `;
 
 const Heading = styled.h1`
 	flex: 1;
 	font-size: 1.5rem !important;
 	font-weight: 900;
-	margin: 2rem 0 0 2rem;
+	margin: 0 2rem !important;
 	color: #d6d6d6;
 `;
 
@@ -59,7 +53,6 @@ const AssignmentsNotices = () => {
 	// eslint-disable-next-line
 	const [student, setStudent] = useState({});
 	const [assignments, setAssignments] = useState([]);
-	const [notices, setNotices] = useState([]);
 
 	let ongoingAssignments = [];
 	let completedAssignments = [];
@@ -87,7 +80,6 @@ const AssignmentsNotices = () => {
 			console.log(res.data.response.assignments);
 			setStudent(res.data.response);
 			setAssignments(res.data.response.assignments);
-			setNotices(res.data.response.notices);
 		});
 	}, [nodeApiUrl, token]);
 
@@ -113,11 +105,6 @@ const AssignmentsNotices = () => {
 					students={true}
 				/>
 			</AssignmentsContainer>
-			{/* <NoticesContainer>
-				<Heading>Notices</Heading>
-				<Flexbreak />
-				<Notices notices={notices} students={true} />
-			</NoticesContainer> */}
 		</>
 	);
 };

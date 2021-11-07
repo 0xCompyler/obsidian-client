@@ -393,6 +393,7 @@ const StudentDashboard = () => {
 							</Route>
 							<Route path="/student/">
 								<Test />
+								{/* <StudentDashboardContent/> */}
 							</Route>
 						</Switch>
 					</div>

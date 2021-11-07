@@ -3,39 +3,7 @@ import styled from "styled-components";
 import DescriptionIcon from '@material-ui/icons/Description';
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 import ModalTeacher from './ModalTeacher.jsx';
-
-const Card = styled.div`
-	flex:1 1 0;
-	font-size: 1rem;
-	font-weight:bold;
-	max-width: 40vw;
-	width:90%;
-    cursor:pointer;
-	background: #2B2C3E;
-	margin:  2rem;
-	${(props) => {
-        if(props.modal) {
-            return `
-                padding:1rem !important;
-            `
-        }
-        else {
-            return `
-                padding:2rem !important;
-            `;
-        }
-    }}
-    padding: 2rem;
-	border-radius: 10px;
-	user-select:none;
-	box-shadow:  2px 2px 23px rgb(27 27 42),
-				-2px -2px 23px rgb(27 27 42);
-	display: flex;
-	flex-direction: column;
-	@media (max-width: 1224px){
-		max-width: 80vw;
-	}
-`
+import Cards from "./Cards"
 
 const Content = styled.div`
 	color: lightgray;
@@ -123,71 +91,18 @@ const AssignmentCard = ({assignments,students,modal,submissions}) => {
 	return (
 		<>
 			{assignments.map((item, index) => {
-				let date  = new Date(item.deadline);
-				// submissions ? date = new Date(item.dateSubmitted) : date = new Date(item.deadline);
 				return (
-					submissions ? (
-						<Card modal={modal} key={index} onClick ={()=>onClickHandler(item)}>
-					<Content>
-						<Description theme={(index % 2 === 0) && `primary`}>
-							<DescriptionIcon />
-							<DescriptionText theme={(index % 2 === 0) && `primary`}>
-								{`${item.assignment}`}
-							</DescriptionText>
-						</Description>
-							<Description theme={(index % 2 !== 0) && `primary`} noBorderRadius>
-								<DescriptionIcon/>
-								<DescriptionText theme={(index % 2 !== 0) && `primary`} notUnderlined>
-									Submitted on: {item.dateSubmitted.substring(0, 10)}
-								</DescriptionText>
-							</Description>
-                            <AssignedBy>
-                                <AssignmentIndIcon />
-                                <AssignedByText>
-                                    {item.givenBy.name}
-                                </AssignedByText>
-                            </AssignedBy>
-
-					</Content>
-				</Card>
-					) : (
-
-				<Card modal={modal} key={index} onClick ={()=>onClickHandler(item)}>
-					<Content>
-						<Description theme={(index % 2 === 0) && `primary`}>
-							<DescriptionIcon />
-							<DescriptionText theme={(index % 2 === 0) && `primary`}>
-								{`${item.title} ${item.description}`}
-							</DescriptionText>
-						</Description>
-						
-						
-						{(date>Date.now())?(
-							<Description theme={(index % 2 !== 0) && `primary`} noBorderRadius>
-								<DescriptionIcon/>
-								<DescriptionText theme={(index % 2 !== 0) && `primary`} notUnderlined>
-									Deadline: {item.deadline.substring(0, 10)}
-								</DescriptionText>
-							</Description>
-						):(<>
-							
-							</>
-						)}
-
-						{students ? (
-                            <AssignedBy>
-                                <AssignmentIndIcon />
-                                <AssignedByText>
-                                    {item.givenBy.name}
-                                </AssignedByText>
-                            </AssignedBy>
-
-                        ) : ""}
-
-					</Content>
-				</Card>
-					)
-			)})}
+					<>
+					<Cards
+						modal={modal}
+						key={index}
+						item={item}
+						onClick ={()=>{
+							onClickHandler(item)
+						}}
+					/>
+					</>
+				)})}
 
             {showModal ? <ModalTeacher assignmentsSubmitted={assignmentsSubmitted} students={students} toggleModal={toggleModal} openModal={showModal} info={showItem} /> : null}
 		</>
