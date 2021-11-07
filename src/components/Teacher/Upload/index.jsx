@@ -150,6 +150,7 @@ const Upload = () => {
 	const [files, setFiles] = useState(null);
 	const [title, setTitle] = useState("");
 	const [desc, setDesc] = useState("");
+	const [assignmentId,setAssignmentId] = useState("");
 	const [deadline, setDeadline] = useState("");
 	const [loading, setLoading] = useState(false);
 
@@ -178,6 +179,7 @@ const Upload = () => {
 							description: desc,
 							assignmentGiven: res.data.url,
 							deadline,
+							assignmentId
 						},
 						{
 							headers: {
@@ -228,6 +230,17 @@ const Upload = () => {
 							onChange={(e) => {
 								e.preventDefault();
 								setDesc(e.target.value);
+							}}
+						/>
+					</TextInputContainer>
+					<TextInputContainer>
+						<TextLabel>Assignment No</TextLabel>
+						<TextInput
+							type="text"
+							value={assignmentId}
+							onChange={(e) => {
+								e.preventDefault();
+								setAssignmentId(e.target.value);
 							}}
 						/>
 					</TextInputContainer>

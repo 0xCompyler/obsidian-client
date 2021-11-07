@@ -266,6 +266,7 @@ const Keywords = () => {
 	const [fields, setFields] = useState([{ value: null }]);
 	const [loading, setLoading] = useState(false);
 	const [fetching, setFetching] = useState(false);
+	const {user} = useContext(UserContext);
 
 	const handleChange = (i, event) => {
 		const values = [...fields];
@@ -286,15 +287,16 @@ const Keywords = () => {
 	};
 
 	const getResults = (e) => {
-		const apiUrl = process.env.REACT_APP_FLASK_API_URL;
+		const apiUrl = process.env.REACT_APP_FASTAPI_URL;
 
 		setLoading(true);
 		const kwords = fields.map((item) => item.value);
 		const splittedSelectedValue = selectedValue.split(" ");
-		Axios.post(`${apiUrl}/keywords`, {
-			subject: splittedSelectedValue[0],
-			topic: splittedSelectedValue[1],
-			kwords,
+		console.log(user.course,selectedValue);
+		Axios.post(`${apiUrl}/assignment/keyword`, {
+			course_code:user.course,
+			assignment_id:selectedValue,
+			keywords:kwords,
 		})
 			.then((res) => {
 				setLoading(false);
@@ -323,12 +325,7 @@ const Keywords = () => {
 				setFetching(false);
 				setOptions(res.data.response.assignments);
 				setSelectedValue(
-					`${res.data.response.assignments[0].title} ${
-						res.data.response.assignments[0].assignmentGiven
-							.split("/")
-							.pop()
-							.split(".")[0]
-					}`
+					`${res.data.response.assignments[0].assignmentId}`
 				);
 			})
 			.catch((err) => {
@@ -427,18 +424,8 @@ const Keywords = () => {
 								? options.map((item) => (
 										<Option
 											key={JSON.stringify(item)}
-											value={`${item.title} ${
-												item.assignmentGiven
-													.split("/")
-													.pop()
-													.split(".")[0]
-											}`}>
-											{`${item.title} ${
-												item.assignmentGiven
-													.split("/")
-													.pop()
-													.split(".")[0]
-											}`}
+											value={`${item.assignmentId}`}>
+											{`${item.assignmentId}`}
 										</Option>
 									))
 								: ""}

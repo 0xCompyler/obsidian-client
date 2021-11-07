@@ -9,6 +9,7 @@ import TableRow from '@material-ui/core/TableRow';
 import { createMuiTheme } from '@material-ui/core';
 import { ThemeProvider } from "@material-ui/styles";
 
+
 const columns = [
 	{
 		id: 'name',
@@ -16,13 +17,13 @@ const columns = [
 		minWidth: 170
 	},
 	{
-		id: 'description',
-		label: 'Description',
+		id: 'time',
+		label: 'Date Submitted',
 		minWidth: 100
 	},
 	{
-		id: 'deadline',
-		label: 'Deadline',
+		id: 'assignment',
+		label: 'Assignment',
 		minWidth: 170,
 	},
 ];
@@ -95,6 +96,7 @@ export default function InfoTable() {
 						<TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
 							{columns.map((column) => {
 							const value = row[column.id];
+							console.log(value,"value");
 							return (
 								<TableCell key={column.id} align={column.align}>
 								{column.format && typeof value === 'number'

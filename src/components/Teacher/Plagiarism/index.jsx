@@ -261,16 +261,17 @@ const Plagiarism = () => {
 	const [selectedValue, setSelectedValue] = useState("");
 	const [loading, setLoading] = useState(false);
 	const [fetching, setFetching] = useState(false);
-
-	const apiUrl = process.env.REACT_APP_FLASK_API_URL;
+	
+	const apiUrl = process.env.REACT_APP_FASTAPI_URL;
+	const { token,user } = useContext(UserContext);
 
 	const getResults = (e) => {
 		e.preventDefault();
 		setLoading(true);
 		const splittedSelectedValue = selectedValue.split(" ");
-		Axios.post(`${apiUrl}/plag`, {
-			subject: splittedSelectedValue[0],
-			topic: splittedSelectedValue[1],
+		Axios.post(`${apiUrl}/assignment/plagiarism`, {
+			course_code:user.course,
+			assignment_id:selectedValue
 		})
 			.then((res) => {
 				setLoading(false);
@@ -285,7 +286,6 @@ const Plagiarism = () => {
 	};
 
 	const nodeApiUrl = process.env.REACT_APP_NODE_API_URL;
-	const { token } = useContext(UserContext);
 
 	useEffect(() => {
 		//Getting assignments for particular teacher
@@ -299,12 +299,7 @@ const Plagiarism = () => {
 				setFetching(false);
 				setOptions(res.data.response.assignments);
 				setSelectedValue(
-					`${res.data.response.assignments[0].title} ${
-						res.data.response.assignments[0].assignmentGiven
-							.split("/")
-							.pop()
-							.split(".")[0]
-					}`
+					`${res.data.response.assignments[0].assignmentId}`
 				);
 			})
 			.catch((err) => {
@@ -321,7 +316,7 @@ const Plagiarism = () => {
 					<Heading>Plagiarism Checker</Heading>
 					<Flexbreak />
 					{result.map((item, index) => {
-						return item.results.map(({ name, sim_score }) => {
+						return item.result.map(({ name, sim_score }) => {
 							console.log(name, "name");
 							let final = (
 								parseInt(threshold) - parseInt(sim_score)
@@ -332,7 +327,7 @@ const Plagiarism = () => {
 										<Description theme="primary">
 											<DescriptionIcon />
 											<DescriptionText theme="primary">
-												{item.original}
+												{item.name}
 											</DescriptionText>
 										</Description>
 										<ProgressBarLabel final={final}>
@@ -404,18 +399,8 @@ const Plagiarism = () => {
 								? options.map((item) => (
 										<Option
 											key={JSON.stringify(item)}
-											value={`${item.title} ${
-												item.assignmentGiven
-													.split("/")
-													.pop()
-													.split(".")[0]
-											}`}>
-											{`${item.title} ${
-												item.assignmentGiven
-													.split("/")
-													.pop()
-													.split(".")[0]
-											}`}
+											value={`${item.assignmentId}`}>
+											{`${item.assignmentId}`}
 										</Option>
 								))
 								: ""}
