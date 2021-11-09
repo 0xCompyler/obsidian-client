@@ -119,7 +119,7 @@ const Heading = styled.h1`
 	font-size: 1.5rem !important;
 	font-weight: 900;
 	margin: 2rem 0 0 2rem;
-	color: #41454a;
+	color: #ececec;
 `;
 
 const Card = styled.div`
@@ -127,13 +127,11 @@ const Card = styled.div`
 	font-size: 1rem;
 	font-weight: bold;
 	min-width: 30vw;
-	width: 90%;
-	background: white;
+	background: var(--app-container-bg-primary);
+	border-radius: 0.5rem;
 	margin: 2rem;
-	padding: 2rem;
-	border-radius: 10px;
+	padding: 1.5rem 1rem;
 	user-select: none;
-	box-shadow: 9px 9px 23px #e3e7ec, -9px -9px 23px #e3e7ec;
 	display: flex;
 	flex-direction: column;
 	cursor: pointer;
@@ -142,10 +140,6 @@ const Card = styled.div`
 	}
 `;
 
-const Flexbreak = styled.div`
-	flex-basis: 100%;
-	height: 0;
-`;
 const Content = styled.div`
 	color: lightgray;
 `;
@@ -155,19 +149,6 @@ const Description = styled.div`
 	align-items: center;
 	border-radius: 10px 10px 0 0;
 	overflow: hidden;
-	${(props) => {
-		if (props.theme === "primary") {
-			return `
-				color: #F4AA1F !important;
-				background: #FFF3E8 !important;
-			`;
-		} else {
-			return `
-				color: #65D862;
-				background: #EEFFED;
-			`;
-		}
-	}}
 	padding: 0 1rem;
 `;
 
@@ -178,27 +159,12 @@ const DescriptionText = styled.a`
 	padding: 0 1rem;
 	transition: all 0.2s ease;
 	color: inherit !important;
-	&:hover {
-		${(props) => {
-			if (props.theme === "primary") {
-				return `
-				color: #DF9B1C !important;;
-			`;
-			} else {
-				return `
-				color: #51AF4F !important;
-			`;
-			}
-		}}
-	}
 `;
 
 const AssignedBy = styled.div`
 	display: flex;
 	align-items: center;
-	border-radius: 0 0 10px 10px;
-	color: #249bd4;
-	background: #def7ff;
+	background: var(--app-container-bg-primary);
 	padding: 0 1rem;
 `;
 
@@ -214,14 +180,13 @@ const AssignedByText = styled.p`
 const StyledProgressBar = styled(ProgressBar)`
 	width: 100%;
 	margin: 0 1rem;
-	background: white !important;
+	background: var(--app-modal-btn-primary) !important;
 `;
 
 const ProgressBarContainer = styled.div`
 	display: flex;
 	align-items: center;
 	border-radius: 0;
-	background: #eff0f4 !important;
 	padding: 1rem 0;
 `;
 
@@ -249,11 +214,23 @@ const Option = styled.option`
 	border: 0px;
 `;
 
+const AssignmentWrapper = styled.div`
+	display: flex;
+	flex-direction: column;
+	padding: 2rem;
+	width: 100%;
+`
+
 const ProgressBarLabel = styled.span`
-	margin-left: 10vw;
+	margin-left: 1rem;
 	display: block;
-	color: ${(props) => (props.final > 0 ? `#28a745` : `#dc3545`)};
+	color: ${(props) => (props.final > 0 ? `#31bb52` : `#f03f51`)};
 `;
+
+const MetaContainer = styled.div`
+	display: flex;
+	justify-content:space-between;
+`
 
 const Plagiarism = () => {
 	const [threshold, setThreshold] = useState("");
@@ -262,7 +239,7 @@ const Plagiarism = () => {
 	const [selectedValue, setSelectedValue] = useState("");
 	const [loading, setLoading] = useState(false);
 	const [fetching, setFetching] = useState(false);
-	
+
 	const apiUrl = process.env.REACT_APP_FASTAPI_URL;
 	const { token,user } = useContext(UserContext);
 
@@ -313,9 +290,9 @@ const Plagiarism = () => {
 	return (
 		<Container>
 			{result.length > 0 ? (
+				<AssignmentWrapper>
+				<Heading>Plagiarism Checker</Heading>
 				<AssignmentsContainer>
-					<Heading>Plagiarism Checker</Heading>
-					<Flexbreak />
 					{result.map((item, index) => {
 						return item.result.map(({ name, sim_score }) => {
 							console.log(name, "name");
@@ -325,12 +302,6 @@ const Plagiarism = () => {
 							return (
 								<Card key={index + name}>
 									<Content>
-										<Description theme="primary">
-											<DescriptionIcon />
-											<DescriptionText theme="primary">
-												{item.name}
-											</DescriptionText>
-										</Description>
 										<ProgressBarLabel final={final}>
 											{final > 0
 												? `Test passed by ${final} %`
@@ -359,18 +330,27 @@ const Plagiarism = () => {
 												/>
 											)}
 										</ProgressBarContainer>
-										<AssignedBy>
-											<DescriptionIcon />
-											<AssignedByText>
-												{name}
-											</AssignedByText>
-										</AssignedBy>
+										<MetaContainer>
+											<Description theme="primary">
+												<DescriptionIcon />
+												<DescriptionText theme="primary">
+													{item.name}
+												</DescriptionText>
+											</Description>
+											<AssignedBy>
+												<DescriptionIcon />
+												<AssignedByText>
+													{name}
+												</AssignedByText>
+											</AssignedBy>
+										</MetaContainer>
 									</Content>
 								</Card>
 							);
 						});
 					})}
 				</AssignmentsContainer>
+				</AssignmentWrapper>
 			) : (
 				<InputContainer>
 					<InputWrapper>

@@ -189,7 +189,7 @@ const AssignmentsNotices = ({history}) => {
 								ongoingAssignments.length > 0 ? (
 									<AssignmentCard click={true} assignments={ongoingAssignments} />
 								) : (
-									<Heading message={true}>No ongoing assignments! </Heading>						
+									<Heading message={true}>No ongoing assignments! </Heading>
 								)
 							}
 						</AssignmentsContainer>
