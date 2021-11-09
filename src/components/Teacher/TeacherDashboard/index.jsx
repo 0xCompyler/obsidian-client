@@ -404,13 +404,6 @@ const TeacherDashboard = (props) => {
 						<SidePanelMember
 							exact
 							activeClassName="active"
-							to="/teacher/notice">
-							<StyledNotificationIcon />
-							notices
-						</SidePanelMember>
-						<SidePanelMember
-							exact
-							activeClassName="active"
 							to="/teacher/keywords">
 							<StyledSortByAlphaIcon />
 							keywords
@@ -443,9 +436,6 @@ const TeacherDashboard = (props) => {
 							</Route>
 							<Route path="/teacher/upload">
 								<Upload />
-							</Route>
-							<Route path="/teacher/notice">
-								<Notices />
 							</Route>
 							<Route path="/teacher/">
 								<TeacherDashboardContent history={props.history}/>

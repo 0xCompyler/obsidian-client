@@ -4,6 +4,7 @@ import AssignmentCard from "@components/Utils/AssignmentCard";
 import Notices from "@components/Utils/Notices";
 import Axios from "axios";
 import UserContext from "../../../contexts/User/UserContext";
+import NoAssignmentsDiagram from "@static/svg/NoAssignmentsDiagram";
 
 const Container = styled.div`
 	display: flex;
@@ -28,21 +29,15 @@ const Container = styled.div`
 	}
 `;
 
-const AssignmentsContainer = styled.div`
-	flex: 1 1 auto;
-	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
-	justify-content: center;
-	width: 100%;
-`;
+// const AssignmentsContainer = styled.div`
+// 	flex: 1 1 auto;
+// 	display: flex;
+// 	flex-wrap: wrap;
+// 	align-items: center;
+// 	justify-content: center;
+// 	width: 100%;
+// `;
 
-const NoticesContainer = styled.div`
-	flex: 1 1 auto;
-	display: flex;
-	flex-wrap: wrap;
-	width: 100%;
-`;
 
 const Heading = styled.h1`
 	flex: 1;
@@ -50,12 +45,20 @@ const Heading = styled.h1`
 	font-weight: 900;
 	margin: 2rem 0 0 2rem;
 	color: ${(props) => props.message ? "green" : "#d6d6d6"};
-	text-align: ${(props) => props.message ? "center" : ""};
+	padding-bottom: 2rem;
 `;
 
-const Flexbreak = styled.div`
-	flex-basis: 100%;
-	height: 0;
+const Wrapper = styled.section`
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	padding: 2rem;
+`
+
+const AssignmentsContainer = styled.div`
+	display: flex;
+	gap: 2rem;
+	flex-wrap: wrap;
 `;
 
 const LoaderStyles = styled.div`
@@ -158,28 +161,61 @@ const AssignmentsNotices = ({history}) => {
 				<Loader />
 			) : (
 				<>
+					{/* <Wrapper>
+						{ongoingAssignments.length > 0 && (
+							<Heading>Upcoming Assignments</Heading>
+						)}
+						<AssignmentsContainer>
+							<AssignmentCard
+								assignments={ongoingAssignments}
+								students={true}
+							/>
+						</AssignmentsContainer>
+					</Wrapper>
 					<AssignmentsContainer>
+						{completedAssignments.length > 0 && (
+							<Heading>Completed Assignments</Heading>
+						)}
+						<Flexbreak />
+						<AssignmentCard
+							assignments={completedAssignments}
+							students={true}
+						/>
+					</AssignmentsContainer> */}
+					<Wrapper>
 						<Heading>Ongoing Assignments</Heading>
-						<Flexbreak />
-						{
-							ongoingAssignments.length > 0 ? (
-								<AssignmentCard click={true} assignments={ongoingAssignments} />
-							) : (
-								<Heading message={true}>No ongoing assignments! </Heading>						
-							)
-						}
-					</AssignmentsContainer>
-					<AssignmentsContainer>
+						<AssignmentsContainer>
+							{
+								ongoingAssignments.length > 0 ? (
+									<AssignmentCard click={true} assignments={ongoingAssignments} />
+								) : (
+									<Heading message={true}>No ongoing assignments! </Heading>						
+								)
+							}
+						</AssignmentsContainer>
+					</Wrapper>
+					<Wrapper>
 						<Heading>Completed Assignments</Heading>
-						<Flexbreak />
-						{
-							completedAssignments.length > 0 ? (
-								<AssignmentCard assignments={completedAssignments} />
-							) : (
-								<Heading message={true}>No deadlines reached ! </Heading>
-							)
-						}
-					</AssignmentsContainer>
+						<AssignmentsContainer>
+							{
+								completedAssignments.length > 0 ? (
+									<AssignmentCard assignments={completedAssignments} />
+								) : (
+									<div style={{
+										display: "flex",
+										justifyContent: "center",
+										alignItems: "center",
+										width: "100%",
+										opacity:"0.5"
+									}}>
+										<NoAssignmentsDiagram/>
+									</div>
+									// <Heading message={true}>No deadlines reached ! </Heading>
+								)
+							}
+						</AssignmentsContainer>
+					</Wrapper>
+
 					{/* <NoticesContainer>
 						<Heading>Notices</Heading>
 						<Flexbreak />

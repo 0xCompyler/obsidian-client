@@ -36,7 +36,7 @@ const InputContainer = styled.div`
 	justify-content: space-around;
 	flex-direction: column;
 	text-transform: capitalize;
-	width: 100%;
+	width: 60%;
 	height: 100%;
 	margin: 2rem 0;
 	@media (max-width: 1224px) {
@@ -70,28 +70,28 @@ const InputLabel = styled.h1`
 
 const TextInput = styled.input`
 	padding: 0.75rem 1rem;
-	margin: 2rem;
-	border-radius: 10px;
-	border: 3px solid #249bd4;
-	background: #def7ff;
+	border-radius: 0.5rem;
+	border: 2px solid var(--app-container-text-primary);
+	background: var(--app-container-bg-primary);
 	outline: none;
 	font-size: 1rem;
 	font-weight: 700;
-	color: #41454a;
+	color: var(--app-text);
+	width: 60%;
 `;
 
 const SubmitBtn = styled.button`
-	display: flex;
-	align-items: center;
-	padding: 0.75rem 1rem;
-	border-radius: 10px;
-	text-transform: uppercase;
-	font-size: 1rem;
-	font-weight: 700;
-	border: 3px solid #69ff80;
-    background: #1b2c30;
-	color: #69ff80;
-	outline: none;
+	display:flex;
+	align-items:center;
+	margin: 0 0 2rem 0;
+	padding: 0.75rem 1.25rem;
+	border-radius: 1000rem;
+	background: var(--app-theme-primary);
+	color: var(--app-text);
+    text-transform: uppercase;
+    font-size: 1rem;
+    font-weight: 700;
+	border: none;
 `;
 
 const StyledFileCopyIcon = styled(FileCopyIcon)`
@@ -101,7 +101,8 @@ const StyledFileCopyIcon = styled(FileCopyIcon)`
 const InputWrapper = styled.div`
 	display: flex;
 	align-items: center;
-	justify-content: center;
+	justify-content: space-between;
+	width: 100%;
 `;
 
 const AssignmentsContainer = styled.div`
@@ -226,14 +227,14 @@ const ProgressBarContainer = styled.div`
 
 const Select = styled.select`
 	padding: 0.75rem 1rem;
-	margin: 2rem;
 	border-radius: 10px;
-	border: 3px solid #249bd4;
-	background: #def7ff;
 	outline: none;
 	font-size: 1rem;
 	font-weight: 700;
-	color: #41454a;
+	border: 2px solid var(--app-container-text-primary);
+	background: var(--app-container-bg-primary);
+	color: var(--app-text);
+	width: 60%;
 `;
 
 const Option = styled.option`

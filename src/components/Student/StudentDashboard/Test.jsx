@@ -93,7 +93,7 @@ const AssignmentsNotices = () => {
 			<Classes/>
 			<Wrapper>
 				{ongoingAssignments.length > 0 && (
-					<Heading>Ongoing Assignments</Heading>
+					<Heading>Upcoming Assignments</Heading>
 				)}
 				<AssignmentsContainer>
 					<AssignmentCard

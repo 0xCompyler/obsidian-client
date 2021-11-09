@@ -368,29 +368,9 @@ const StudentDashboard = () => {
 							<StyledDashboardIcon />
 							dashboard
 						</SidePanelMember>
-						<SidePanelMember
-							exact
-							activeClassName="active"
-							to="/student/quiz">
-							<StyledQuestionAnswerIcon />
-							quiz
-						</SidePanelMember>
-						<SidePanelMember
-							exact
-							activeClassName="active"
-							to="/student/upload">
-							<StyledUploadIcon />
-							Upload
-						</SidePanelMember>
 					</div>
 					<div className="content">
 						<Switch>
-							<Route path="/student/quiz">
-								<Quiz />
-							</Route>
-							<Route path="/student/upload">
-								<Upload />
-							</Route>
 							<Route path="/student/">
 								<Test />
 								{/* <StudentDashboardContent/> */}

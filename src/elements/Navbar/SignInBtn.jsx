@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { LazyMotion, domAnimation, m } from "framer-motion";
+import { useHistory } from "react-router-dom";
 
 const Btn = styled(m.a)`
 	display: flex;
@@ -30,10 +31,9 @@ const AnimBtn = ({ children, onClick }) => (
 )
 
 const SignInBtn = () => {
+	const history = useHistory()
 	const handleClick = () => {
-		(async () => {
-			console.log("clicked")
-		}) ();
+		history.push("/login")
 	}
 	return (
 		<LazyMotion features={domAnimation}>

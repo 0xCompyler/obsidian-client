@@ -6,6 +6,8 @@ import PaperIcon from "@material-ui/icons/Description";
 import PersonIcon from "@material-ui/icons/AssignmentInd";
 import Axios from "axios";
 import UserContext from "../../../contexts/User/UserContext";
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
 const Container = styled.div`
 	display: flex;
@@ -34,7 +36,7 @@ const InputContainer = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: space-around;
-	flex-direction: column;
+	/* flex-direction: column; */
 	text-transform: capitalize;
 	width: 100%;
 	height: 100%;
@@ -82,13 +84,13 @@ const CloseButton = styled.button`
 	justify-content:center;
 	padding: 0.75rem;
 	border-radius: 1000rem;
-	line-height:1rem;
-	border: 3px solid #e53935;
-	background: #ffcdd2;
+	/* line-height:1rem; */
+	background: transparent;
+	border: none;
 	text-transform: uppercase;
-	font-size:0.8rem;
+	font-size:1.5rem;
 	font-weight: 700;
-	color: #e53935;
+	color: #e74845;
 	position: relative;
 	outline: none;
 	justify-self:flex-end;
@@ -103,12 +105,12 @@ const AddButton = styled.button`
 	padding: 0.75rem;
 	border-radius: 1000rem;
 	line-height:1.1rem;
-	border: 3px solid #00c853;
-	background: #b9f6ca;
+	background: transparent;
+	border: none;
 	text-transform: uppercase;
-	font-size: 1rem;
+	font-size: 1.5rem;
 	font-weight: 700;
-	color: #00c853;
+	color: #28e979;
 	position: relative;
 	outline: none;
 	margin-left:auto;
@@ -240,6 +242,7 @@ const Select = styled.select`
 	font-size: 1rem;
 	font-weight: 700;
 	color: var(--app-text);
+	width: 100%;
 `;
 
 const Option = styled.option`
@@ -390,7 +393,9 @@ const Keywords = () => {
 					<InputWrapper>
 						<StyledInputGroup>
 							<InputLabel>Enter Keywords</InputLabel>
-							<AddButton onClick={() => handleAdd()}>+</AddButton>
+							<AddButton onClick={() => handleAdd()}>
+								<AddCircleOutlineIcon/>
+							</AddButton>
 						</StyledInputGroup>
 						{fields.map((field, idx) => {
 							return (
@@ -401,8 +406,8 @@ const Keywords = () => {
 										onChange={(e) => handleChange(idx, e)}
 									/>
 									<CloseButton
-										onClick={() => handleRemove(idx)}>
-										&#10006;
+									onClick={() => handleRemove(idx)}>
+										<HighlightOffIcon/>
 									</CloseButton>
 								</StyledInputGroup>
 							);
