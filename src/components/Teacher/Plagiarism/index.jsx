@@ -251,16 +251,16 @@ const Plagiarism = () => {
 			course_code:user.course,
 			assignment_id:selectedValue
 		})
-			.then((res) => {
-				setLoading(false);
-				console.log(res.data, "plag data");
-				setResult(res.data);
-			})
-			.catch((err) => {
-				window.alert("Network error");
-				setLoading(false);
-				console.log(err);
-			});
+		.then((res) => {
+			setLoading(false);
+			console.log(res.data, "plag data");
+			setResult(res.data);
+		})
+		.catch((err) => {
+			window.alert("Network error");
+			setLoading(false);
+			console.log(err);
+		});
 	};
 
 	const nodeApiUrl = process.env.REACT_APP_NODE_API_URL;
