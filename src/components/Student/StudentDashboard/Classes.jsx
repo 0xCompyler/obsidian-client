@@ -1,6 +1,7 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import styled from "styled-components";
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
+import Axios from "axios";
 
 const Wrapper = styled.section`
 	display: flex;
@@ -76,13 +77,13 @@ const Cards = (props) => {
 	const { item } = props;
 	return (
 		<>
-			<CardContainer href={item.link} >
+			<CardContainer href={`https://meet.jit.si/${item._id}`} target="_blank">
 				<div>
-					<h3>{item.title}</h3>
+					<h3>{item._id}</h3>
 				</div>
 				<div>
-					<h2>{item.date}</h2>
-					<h2><AccessTimeIcon/><span>{item.time}</span></h2>
+					<h2>{item.credits}</h2>
+					<h2><AccessTimeIcon/><span>{`${item.from}-${item.to}`}</span></h2>
 				</div>
 			</CardContainer>
 		</>
@@ -90,34 +91,46 @@ const Cards = (props) => {
 }
 
 const Classes = () => {
-	const classInfo = [{
-		"title":"Class 1",
-		"date":"01/01/21",
-		"time":"12:00",
-		"link":"https://google.com",
-	},{
-		"title":"Class 2",
-		"date":"01/01/21",
-		"time":"12:00",
-		"link":"https://google.com",
-	},{
-		"title":"Class 3",
-		"date":"01/01/21",
-		"time":"12:00",
-		"link":"https://google.com",
-	},{
-		"title":"Class 4",
-		"date":"01/01/21",
-		"time":"12:00",
-		"link":"https://google.com",
-	}]
+	const [courses,setCourses] = useState([]);
+
+	const nodeApiUrl = process.env.REACT_APP_NODE_API_URL;
+
+	useEffect(() => {
+		Axios.get(`${nodeApiUrl}course/getAllCourses`)
+			.then((coursesResponse) => {
+				console.log(coursesResponse,"course");
+				Axios.get(`${nodeApiUrl}course/getDate`)
+				.then((res) => {
+					let upcomingClass = [];
+					coursesResponse.data.response.map((course) => {
+						var currentDate = new Date(res.data.response);
+						if(currentDate.getHours() < course.from.substring(0,2)){
+							upcomingClass.push(course);
+						}
+					})
+					setCourses(upcomingClass);
+				}).catch((err) => {
+					console.log(err);
+				})
+			})
+			.catch((err) => {
+				//Todo instead add Toast
+				console.log(err);
+				// if (Array.isArray(err.response.data.error)) {
+				// 	setErrors(err.response.data.error);
+				// } else {
+				// 	setErrors([{ msg: err.response.data.error }]);
+				// }
+			});
+	},[])
+
 	return (
 		<Wrapper>
 			<Heading>
 				Upcoming Classes
 			</Heading>
 			<CardWrapper>
-				{classInfo.map((item,index)=>(
+				{courses.map((item,index)=>(
 					<Cards item={item}/>
 				))}
 			</CardWrapper>

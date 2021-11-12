@@ -330,8 +330,9 @@ const StudentDashboard = () => {
 									</DropDownGroup>
 									<Dropdown.Menu variant="dark">
 										<Dropdown.Item eventKey="1">
-											Epic 1
+											Earned 6 points for attending all the classes
 										</Dropdown.Item>
+										<Dropdown.Divider />
 										<Dropdown.Item eventKey="2">
 											Epic 2
 										</Dropdown.Item>
