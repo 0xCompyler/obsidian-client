@@ -15,6 +15,7 @@ const Container = styled.div`
 	align-items: center;
 	height: 100%;
 	overflow: auto;
+	padding: 2rem;
 	&::-webkit-scrollbar-track {
 		border-radius: 10px;
 		background-color: inherit;
@@ -123,7 +124,9 @@ const StyledFileCopyIcon = styled(FileCopyIcon)`
 `;
 
 const BackButtonIcon = styled(BackButton)`
-	margin: 2rem 0 0 2rem;
+	margin: 0 1rem;
+	color: var(--app-text);
+	cursor: pointer;
 `;
 
 const InputWrapper = styled.div`
@@ -141,12 +144,10 @@ const InputGroup = styled.div`
 `;
 
 const AssignmentsContainer = styled.div`
-	flex: 1 1 auto;
 	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
 	justify-content: center;
 	width: 100%;
+	flex-direction: column;
 `;
 
 const Heading = styled.h1`
@@ -154,7 +155,7 @@ const Heading = styled.h1`
 	font-size: 1.5rem !important;
 	font-weight: 900;
 	margin: 2rem 0 0 2rem;
-	color: #41454a;
+	color: var(--app-text);
 `;
 
 const Card = styled.div`
@@ -162,15 +163,14 @@ const Card = styled.div`
 	font-size: 1rem;
 	font-weight: bold;
 	min-width: 30vw;
-	width: 90%;
-	background: white;
+	background: var(--app-container-bg-primary);
+	border-radius: 0.5rem;
 	margin: 2rem;
-	padding: 2rem;
-	border-radius: 10px;
+	padding: 1.5rem 1rem;
 	user-select: none;
-	box-shadow: 9px 9px 23px #e3e7ec, -9px -9px 23px #e3e7ec;
 	display: flex;
 	flex-direction: column;
+	cursor: pointer;
 	@media (max-width: 1224px) {
 		max-width: 80vw;
 	}
@@ -178,14 +178,12 @@ const Card = styled.div`
 const CardTitleContainer = styled.div`
 	display: flex;
 	align-items: center;
-	border-radius: 10px 10px 0 0;
-	color: #249bd4;
-	background: #def7ff;
 	padding: 0 1rem;
+	margin-left: auto;
+	margin-bottom: 1rem;
 `;
 
 const CardTitle = styled.div`
-	margin: 1rem 0rem;
 	font-weight: normal;
 	padding: 0 1vw;
 	transition: all 0.2s ease;
@@ -206,19 +204,15 @@ const KeywordsContainer = styled.div`
 	display: flex;
 	align-items: center;
 	padding: 0.75rem 1rem;
-	border-radius: ${(props) =>
-		!props.noBorderRadius ? `0 0 10px 10px ` : `none`};
 	overflow: hidden;
 	${(props) => {
 		if (props.theme !== "primary") {
 			return `
-				color: #fc1703;
-				background: #FFF3E8;
+				color: #ff5343;
 			`;
 		} else {
 			return `
-				color: #65D862;
-				background: #EEFFED;
+				color: #70e76c;
 			`;
 		}
 	}}
@@ -260,6 +254,11 @@ const Option = styled.option`
 const StyledInputGroup = styled(InputGroup)`
 	flex: 1;
     width: 100%;
+`
+
+const ContentContainer = styled.div`
+	display: flex;
+	align-items:center;
 `
 
 const Keywords = () => {
@@ -346,47 +345,48 @@ const Keywords = () => {
 						<BackButtonIcon onClick={() => setResult([])} />
 						<Heading>Keywords Checker</Heading>
 					</Group>
-					<Flexbreak />
-					{result.map((item, index) => (
-						<Card key={index}>
-							<CardTitleContainer>
-								<PersonIcon />
-								<CardTitle>{item.name}</CardTitle>
-							</CardTitleContainer>
-							<Content>
-								<KeywordsContainer
-									noBorderRadius
-									theme="primary">
-									<PaperIcon />
-									<Group>
-										Present :
-										{Object.values(item).map(
-											(value, i) =>
-												value === "true" && (
-													<Keyword>
-														{Object.keys(item)[i]}{" "}
-													</Keyword>
-												)
-										)}
-									</Group>
-								</KeywordsContainer>
-								<KeywordsContainer theme="warning">
-									<PaperIcon />
-									<Group>
-										Absent :
-										{Object.values(item).map(
-											(value, i) =>
-												value === "false" && (
-													<Keyword>
-														{Object.keys(item)[i]}
-													</Keyword>
-												)
-										)}
-									</Group>
-								</KeywordsContainer>
-							</Content>
-						</Card>
-					))}
+					<ContentContainer>
+						{result.map((item, index) => (
+							<Card key={index}>
+								<Content>
+									<KeywordsContainer
+										noBorderRadius
+										theme="primary">
+										<PaperIcon />
+										<Group>
+											Present :
+											{Object.values(item).map(
+												(value, i) =>
+													value === "true" && (
+														<Keyword>
+															{Object.keys(item)[i]}{" "}
+														</Keyword>
+													)
+											)}
+										</Group>
+									</KeywordsContainer>
+									<KeywordsContainer theme="warning">
+										<PaperIcon />
+										<Group>
+											Absent :
+											{Object.values(item).map(
+												(value, i) =>
+													value === "false" && (
+														<Keyword>
+															{Object.keys(item)[i]}
+														</Keyword>
+													)
+											)}
+										</Group>
+									</KeywordsContainer>
+								</Content>
+								<CardTitleContainer>
+									<PersonIcon />
+									<CardTitle>{item.name}</CardTitle>
+								</CardTitleContainer>
+							</Card>
+						))}
+					</ContentContainer>
 				</AssignmentsContainer>
 			) : (
 				<InputContainer>
