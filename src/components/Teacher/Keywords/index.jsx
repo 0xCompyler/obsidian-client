@@ -349,36 +349,40 @@ const Keywords = () => {
 						{result.map((item, index) => (
 							<Card key={index}>
 								<Content>
-									<KeywordsContainer
-										noBorderRadius
-										theme="primary">
-										<PaperIcon />
-										<Group>
-											Present :
-											{Object.values(item).map(
-												(value, i) =>
-													value === "true" && (
-														<Keyword>
-															{Object.keys(item)[i]}{" "}
-														</Keyword>
-													)
-											)}
-										</Group>
-									</KeywordsContainer>
-									<KeywordsContainer theme="warning">
-										<PaperIcon />
-										<Group>
-											Absent :
-											{Object.values(item).map(
-												(value, i) =>
-													value === "false" && (
-														<Keyword>
-															{Object.keys(item)[i]}
-														</Keyword>
-													)
-											)}
-										</Group>
-									</KeywordsContainer>
+									{Object.values(item).filter(elem=>elem.value==="true")?.length!==0&&(
+										<KeywordsContainer
+											noBorderRadius
+											theme="primary">
+											<PaperIcon />
+											<Group>
+												Present :
+												{Object.values(item).map(
+													(value, i) =>
+														value === "true" && (
+															<Keyword>
+																{Object.keys(item)[i]}{" "}
+															</Keyword>
+														)
+												)}
+											</Group>
+										</KeywordsContainer>
+									)}
+									{Object.values(item).filter(elem => elem === "false")?.length !== 0 && (
+										<KeywordsContainer theme="warning">
+											<PaperIcon />
+											<Group>
+												Absent :
+												{Object.values(item).map(
+													(value, i) =>
+														value === "false" && (
+															<Keyword>
+																{Object.keys(item)[i]}
+															</Keyword>
+														)
+												)}
+											</Group>
+										</KeywordsContainer>
+									)}
 								</Content>
 								<CardTitleContainer>
 									<PersonIcon />
