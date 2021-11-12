@@ -6,6 +6,7 @@ import Notices from "../Notices";
 import Quiz from "../Quiz";
 import Keywords from "../Keywords";
 import Upload from "../Upload";
+import Meet from "../Meet";
 // import SearchIcon from '@material-ui/icons/Search';
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
@@ -18,6 +19,7 @@ import QuestionAnswerIcon from "@material-ui/icons/QuestionAnswer";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import MenuIcon from "@material-ui/icons/Menu";
+import MovieCreationIcon from '@material-ui/icons/MovieCreation';
 import { Switch, Route, NavLink } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import UserContext from "../../../contexts/User/UserContext";
@@ -177,6 +179,13 @@ const StyledCalenderIcon = styled(CalendarTodayIcon)`
 	}
 	&:focus {
 		color: gray;
+	}
+`;
+
+const StyledMovieCreationIcon = styled(MovieCreationIcon)`
+	margin: 0 1rem;
+	@media (max-width: 1224px) {
+		margin: 0 0.5rem;
 	}
 `;
 
@@ -422,6 +431,13 @@ const TeacherDashboard = (props) => {
 							<StyledUploadIcon />
 							Upload
 						</SidePanelMember>
+						<SidePanelMember
+							exact
+							activeClassName="active"
+							to="/teacher/meet">
+							<StyledMovieCreationIcon />
+							Meet
+						</SidePanelMember>
 					</div>
 					<div className="content">
 						<Switch>
@@ -436,6 +452,9 @@ const TeacherDashboard = (props) => {
 							</Route>
 							<Route path="/teacher/upload">
 								<Upload />
+							</Route>
+							<Route path="/teacher/meet">
+								<Meet/>
 							</Route>
 							<Route path="/teacher/">
 								<TeacherDashboardContent history={props.history}/>
