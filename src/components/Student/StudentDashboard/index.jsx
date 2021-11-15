@@ -348,30 +348,6 @@ const StudentDashboard = () => {
 										</Dropdown.Item>
 									</Dropdown.Menu>
 								</Dropdown>
-								<Dropdown>
-									<DropDownGroup>
-										<Dropdown.Toggle
-											as={CustomToggle}
-											id="dropdown-custom-components">
-											<StyledBadge variant="dot" color="secondary">
-												<StyledCalenderIcon />
-											</StyledBadge>
-										</Dropdown.Toggle>
-									</DropDownGroup>
-									<Dropdown.Menu variant="dark">
-										<Dropdown.Item eventKey="1">
-											Epic 4
-										</Dropdown.Item>
-										<Dropdown.Item eventKey="2">
-											Epic 5
-										</Dropdown.Item>
-										{/* use this to add hr between elements btw*/}
-										<Dropdown.Divider />
-										<Dropdown.Item>
-											Epic 6
-										</Dropdown.Item>
-									</Dropdown.Menu>
-								</Dropdown>
 							</IconGroup>
 							<Dropdown>
 								<DropDownGroup>
