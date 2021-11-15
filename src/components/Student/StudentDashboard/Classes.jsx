@@ -3,6 +3,7 @@ import styled from "styled-components";
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import Axios from "axios";
 import ActivityCard from "./ActivityCard";
+import NoAssignmentsDiagram from "@static/svg/NoAssignmentsDiagram";
 
 const Wrapper = styled.section`
 	display: grid;
@@ -152,14 +153,23 @@ const Classes = () => {
 					Upcoming Classes
 				</Heading>
 				<CardWrapper>
-					{courses.map((item,index)=>(
+					{courses.length!==0 ? courses.map((item,index)=>(
 						<>
 							<Cards item={item} />
 							<Cards item={item} />
 							<Cards item={item} />
 							<Cards item={item} />
 						</>
-					))}
+					)) : (
+					<div style={{
+						display: "flex",
+						justifyContent: "center",
+						alignItems: "center",
+						width: "100%",
+						opacity: "0.5"
+					}}>
+						<NoAssignmentsDiagram/>
+					</div>)}
 				</CardWrapper>
 			</ClassSection>
 			<ActivitySection>
