@@ -13,6 +13,7 @@ import QuestionAnswerIcon from "@material-ui/icons/QuestionAnswer";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import MenuIcon from "@material-ui/icons/Menu";
+import EmojiEventsIcon from '@material-ui/icons/EmojiEvents';
 import { Switch, Route, NavLink } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import UserContext from "../../../contexts/User/UserContext";
@@ -273,6 +274,10 @@ const SidePanelMember = styled(NavLink)`
 	}
 `
 
+const Points = styled.b`
+	color: #13bb13 !important;
+`
+
 const StyledQuestionAnswerIcon = styled(QuestionAnswerIcon)`
 	margin: 0 1rem;
 	@media (max-width: 1224px) {
@@ -330,7 +335,7 @@ const StudentDashboard = () => {
 									</DropDownGroup>
 									<Dropdown.Menu variant="dark">
 										<Dropdown.Item eventKey="1">
-											Earned 6 points for attending all the classes
+											<EmojiEventsIcon /> Earned <Points>6 points</Points> for attending all the classes
 										</Dropdown.Item>
 										<Dropdown.Divider />
 										<Dropdown.Item eventKey="2">

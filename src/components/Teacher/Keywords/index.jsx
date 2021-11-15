@@ -180,7 +180,7 @@ const CardTitleContainer = styled.div`
 	align-items: center;
 	padding: 0 1rem;
 	margin-left: auto;
-	margin-bottom: 1rem;
+	margin-bottom: 0.5rem;
 `;
 
 const CardTitle = styled.div`
@@ -203,7 +203,7 @@ const Group = styled.div`
 const KeywordsContainer = styled.div`
 	display: flex;
 	align-items: center;
-	padding: 0.75rem 1rem;
+	padding: 0.5rem 1rem;
 	overflow: hidden;
 	${(props) => {
 		if (props.theme !== "primary") {

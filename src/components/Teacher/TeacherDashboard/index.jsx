@@ -197,7 +197,7 @@ margin: 0 1rem;
 `;
 
 const StyledBadge = styled(Badge)`
-	margin: 0 0.5rem;
+	margin: 0;
 `;
 
 const DropDown = styled.div`
@@ -242,7 +242,7 @@ const DropDownGroup = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	padding: 0 1.5rem;
+	padding: 0 0.75rem;
 `;
 
 const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
@@ -353,12 +353,55 @@ const TeacherDashboard = (props) => {
 					<div className="navbar">
 						<RightSide>
 							<IconGroup>
-								<StyledBadge variant="dot" color="secondary">
-									<StyledNotifIcon />
-								</StyledBadge>
-								<StyledBadge variant="dot" color="secondary">
-									<StyledCalenderIcon />
-								</StyledBadge>
+								<Dropdown>
+									<DropDownGroup>
+										<Dropdown.Toggle
+											as={CustomToggle}
+											id="dropdown-custom-components">
+											<StyledBadge variant="dot" color="secondary">
+												<StyledNotifIcon />
+											</StyledBadge>
+										</Dropdown.Toggle>
+									</DropDownGroup>
+									<Dropdown.Menu variant="dark">
+										<Dropdown.Item eventKey="1">
+											Earned 6 points for attending all the classes
+										</Dropdown.Item>
+										<Dropdown.Divider />
+										<Dropdown.Item eventKey="2">
+											Epic 2
+										</Dropdown.Item>
+										{/* use this to add hr between elements btw*/}
+										<Dropdown.Divider />
+										<Dropdown.Item>
+											Epic 3
+										</Dropdown.Item>
+									</Dropdown.Menu>
+								</Dropdown>
+								<Dropdown>
+									<DropDownGroup>
+										<Dropdown.Toggle
+											as={CustomToggle}
+											id="dropdown-custom-components">
+											<StyledBadge variant="dot" color="secondary">
+												<StyledCalenderIcon />
+											</StyledBadge>
+										</Dropdown.Toggle>
+									</DropDownGroup>
+									<Dropdown.Menu variant="dark">
+										<Dropdown.Item eventKey="1">
+											Epic 4
+										</Dropdown.Item>
+										<Dropdown.Item eventKey="2">
+											Epic 5
+										</Dropdown.Item>
+										{/* use this to add hr between elements btw*/}
+										<Dropdown.Divider />
+										<Dropdown.Item>
+											Epic 6
+										</Dropdown.Item>
+									</Dropdown.Menu>
+								</Dropdown>
 							</IconGroup>
 							<Dropdown>
 								<DropDownGroup>
@@ -369,7 +412,7 @@ const TeacherDashboard = (props) => {
 										<StyledExpandIcon />
 									</Dropdown.Toggle>
 								</DropDownGroup>
-								<Dropdown.Menu>
+								<Dropdown.Menu variant="dark">
 									<Dropdown.Item eventKey="1">
 										Email
 									</Dropdown.Item>
