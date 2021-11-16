@@ -22,11 +22,8 @@ const LinkContainer = styled.div`
 const LinkGroups = () => {
 	return (
 		<LinkContainer>
-			<NavLink to="/" exact className="nav-links" activeClassName="nav-selected">
+			<NavLink to="/student" exact className="nav-links" activeClassName="nav-selected">
 				Dashboard
-			</NavLink>
-			<NavLink to="/create" exact className="nav-links" activeClassName="nav-selected">
-				Create
 			</NavLink>
 		</LinkContainer>
 	)

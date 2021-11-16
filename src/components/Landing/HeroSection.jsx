@@ -10,6 +10,7 @@ const Wrapper = styled.div`
 	display: grid;
 	place-items:center;
 	h1{
+		font-size: 2.5rem;
 		font-weight: 900;
 	}
 	h4{
@@ -73,12 +74,13 @@ const HeroSection = () => {
 					<img src={Logo} height="120px" alt="Logo"/>
 					<ItemContainer>
 						<h1>Obsidian</h1>
-						<h4>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptas atque neque amet rem obcaecati est ipsam aspernatur animi officiis debitis inventore maiores, nihil consectetur perferendis veniam voluptatibus quidem, voluptatem incidunt.</h4>
+						<h4>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</h4>
 					</ItemContainer>
 				</Container>
 				<ButtonContainer>
 					<LazyMotion features={domAnimation}>
 						<Btn
+							href="/login"
 							whileHover={{
 								scale:1.01,
 								y:-7.5,
@@ -86,6 +88,7 @@ const HeroSection = () => {
 							}}
 						>Get Started</Btn>
 						<Btn
+							href="/signup"
 							whileHover={{
 								scale: 1.01,
 								y: -7.5,
