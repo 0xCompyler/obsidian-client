@@ -40,7 +40,7 @@ const ActivityCard = ({ items }) => {
 			<ActivityCardContainer>
 				{items.map((item, index) => (
 					<Card key={index}>
-						<h3>XP
+						<h3>{item.name}
 							<p>Score {item.score}</p>
 						</h3>
 						<ProgressBar variant={xpVariant[index]} animated now={item.xp*100/5} />

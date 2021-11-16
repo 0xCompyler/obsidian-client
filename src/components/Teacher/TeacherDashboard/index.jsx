@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import TeacherDashboardContent from "../TeacherDashboardContent";
 import Plagiarism from "../Plagiarism";
-import Notices from "../Notices";
 import Quiz from "../Quiz";
 import Keywords from "../Keywords";
 import Upload from "../Upload";
@@ -248,25 +247,14 @@ const DropDownGroup = styled.div`
 const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
 	// eslint-disable-next-line
 	<>
-		{/* <a
-		href=""
+	<DropDown
 		ref={ref}
 		onClick={(e) => {
 			e.preventDefault();
 			onClick(e);
-		}}
-		>
+		}}>
 		{children}
-    &#x25bc;
-	</a> */}
-		<DropDown
-			ref={ref}
-			onClick={(e) => {
-				e.preventDefault();
-				onClick(e);
-			}}>
-			{children}
-		</DropDown>
+	</DropDown>
 	</>
 ));
 
@@ -472,9 +460,9 @@ const TeacherDashboard = (props) => {
 							<Route path="/teacher/upload">
 								<Upload />
 							</Route>
-							{/* <Route path="/teacher/meet">
-								<Meet/>
-							</Route> */}
+							<Route path="/teacher/meet">
+								<Meet />
+							</Route>
 							<Route path="/teacher/">
 								<TeacherDashboardContent history={props.history}/>
 							</Route>

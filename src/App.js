@@ -15,6 +15,7 @@ import {
 	Route,
 } from "react-router-dom";
 import PrivateRoute from "@components/Private";
+import Meet from "@components/Teacher/Meet";
 
 const App = () => {
 	return (

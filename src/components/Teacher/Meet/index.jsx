@@ -5,6 +5,7 @@ import "@styles/plyr.css";
 import Funnies from 'funnies';
 import LoadingIcon from "@static/svg/LoadingIcon";
 import { CSSTransitionGroup } from 'react-transition-group'
+import Axios from "axios";
 
 const Container = styled.div`
 	display: flex;
@@ -130,6 +131,20 @@ const TranscriptContent = styled.p`
 	}
 `
 
+const UploadButton = styled.button`
+	display:flex;
+	align-items:center;
+	margin: 1.5rem 0 2rem 0;
+	padding: 0.75rem 1.25rem;
+	border-radius: 1000rem;
+	background: var(--app-theme-primary);
+	color: var(--app-text);
+    text-transform: uppercase;
+    font-size: 1rem;
+    font-weight: 700;
+	border: none;
+`;
+
 const Video = React.memo(({ url }) => {
 	const settings = {
 		type: "video",
@@ -162,6 +177,8 @@ const Meet = () => {
 	const [loadingMessage, setLoadingMessage] = useState(funnies.message());
 	const [url, setUrl] = useState("https://www.dropbox.com/s/jerz74q64ww9hev/lmaokuchbhi%20on%202021-11-05%2020-28.mp4?raw=1#");
 	const [transcriptionIsLoading, setTranscriptionIsLoading] = useState(true);
+	const [transcriptionData,setTranscriptionData] = useState("");
+
 	useEffect(() => {
 		let changeMessage = ""
 		if(transcriptionIsLoading){
@@ -169,13 +186,24 @@ const Meet = () => {
 				setLoadingMessage(funnies.message())
 			}, 5000);
 		}
-		setTimeout(() => {
-			setTranscriptionIsLoading(false)
-		}, 200000);
+
+		// setTimeout(() => {
+		// 	setTranscriptionIsLoading(false)
+		// }, 200000);
 		return ()=> {
 			clearInterval(changeMessage);
 		}
 	}, [])
+
+
+	const getTranscription = () => {
+		Axios.post("https://obsidian-server-prod.herokuapp.com/assignment/keyword/transcribe_url",{
+			dropbox_url:url
+		}).then((res) => {
+			setTranscriptionData(res.data);
+		})
+	}
+
 	return (
 		<Container>
 			<Heading>Meet Info </Heading>
@@ -210,6 +238,7 @@ const Meet = () => {
 							setUrl(e.target.value);
 						}}
 					/>
+					<UploadButton onClick={() => getTranscription() }> Submit </UploadButton>
 				</InputWrapper>
 			</Section>
 
