@@ -19,6 +19,7 @@ const Nav = styled.nav`
 	padding: 2.5rem 3.75rem;
 	backdrop-filter: ${props=>props.blur?`blur(5px)`:`none`};
 	z-index: 10;
+	height: ${props=>props.landing?`8rem`:`auto`};
 `
 
 const LogoContainer = styled.a`
@@ -45,7 +46,7 @@ const ContentContainer = styled.div`
 	gap: 1rem;
 `
 
-const Navbar = () => {
+const Navbar = ({ landing }) => {
 	const [isAtTop, setIsAtTop] = useState(true)
 	const isTabletOrMobile = useIsTabletOrMobile();
 	const logoRef = useRef();
@@ -58,7 +59,7 @@ const Navbar = () => {
 		return () => (window.onscroll = null);
 	});
 	return (
-		<Nav blur={!isAtTop}>
+		<Nav landing={landing} blur={!isAtTop}>
 			<LogoContainer href="/" ref={logoRef} className="animate-icon">
 				<LogoIcon/>
 				<span>{constants.APP_NAME}</span>

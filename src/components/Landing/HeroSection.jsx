@@ -1,18 +1,101 @@
 import React from "react";
 import styled from "styled-components";
+import Logo from "@static/svg/logo.svg";
+import { domAnimation, LazyMotion, m } from "framer-motion";
 
 const Wrapper = styled.div`
 	padding: 0 6rem;
-	// padding-right:0;
-	height: 65vh;
+	height: 100%;
+	width: 100%;
 	display: grid;
-	grid-template-columns: repeat(2, minmax(0, 1fr));
+	place-items:center;
+	h1{
+		font-weight: 900;
+	}
+	h4{
+		font-weight: 200;
+		font-size: 1rem;
+	}
+`
+
+const Container = styled.div`
+	display: flex;
+	align-items: center;
+	gap: 2rem;
+	width: 100%;
+`
+
+const ItemContainer = styled.div`
+	display: grid;
+	gap: 0.5rem;
+`
+
+const ButtonContainer = styled.div`
+	display: flex;
+	gap: 2rem;
+`
+
+const Btn = styled(m.a)`
+	display: flex;
+	align-items: center;
+	font-family: var(--font-family);
+	font-size: 1rem;
+	font-weight: 700;
+	padding: 0 1.25rem;
+	border-radius: 1000rem;
+	background: ${props => props.secondary ? `transparent` : `var(--app-theme-primary)`};
+	color: ${props => props.secondary ? `var(--app-container-text-primary-hover)` : `var(--app-text)`};
+	border: ${props => props.secondary ?`0.1rem solid var(--app-container-text-primary-hover)`:`none`};
+	outline: none;
+	height: 2.5rem;
+	cursor: pointer;
+	z-index:2;
+	user-select:none;
+	transition: border 0.2s ease;
+	&:hover{
+		border: ${props => props.secondary ? `0.1rem solid var(--app-text)` : "none"};
+	}
+`
+
+const ContentContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items:center;
+	width: 50%;
+	gap: 2rem;
 `
 
 const HeroSection = () => {
 	return (
 		<Wrapper>
-			Obsidian ™👍
+			<ContentContainer>
+				<Container>
+					<img src={Logo} height="120px" alt="Logo"/>
+					<ItemContainer>
+						<h1>Obsidian</h1>
+						<h4>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptas atque neque amet rem obcaecati est ipsam aspernatur animi officiis debitis inventore maiores, nihil consectetur perferendis veniam voluptatibus quidem, voluptatem incidunt.</h4>
+					</ItemContainer>
+				</Container>
+				<ButtonContainer>
+					<LazyMotion features={domAnimation}>
+						<Btn
+							whileHover={{
+								scale:1.01,
+								y:-7.5,
+								x:0
+							}}
+						>Get Started</Btn>
+						<Btn
+							whileHover={{
+								scale: 1.01,
+								y: -7.5,
+								x: 0
+							}}
+							secondary
+						>Already Registered</Btn>
+					</LazyMotion>
+				</ButtonContainer>
+			</ContentContainer>
 		</Wrapper>
 	)
 }
