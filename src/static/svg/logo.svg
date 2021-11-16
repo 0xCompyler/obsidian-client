@@ -1,6 +1,28 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 533.14">
 	<defs>
-		<style>.cls-1{fill:#160015;}.cls-2{fill:#260125;}.cls-3{fill:#380138;}.cls-4{fill:#590259;}.cls-5{fill:#4b014a;}.cls-6{fill:#300230;}.cls-7{fill:#460145;}</style>
+	<style>
+		.cls-1{
+			fill:#444444;
+		}
+		.cls-2{
+			fill:#343434;
+		}
+		.cls-3{
+			fill:#5b5b5b;
+		}
+		.cls-4{
+			fill:#bbbbbb;
+		}
+		.cls-5{
+			fill:#9a9a9a;
+		}
+		.cls-6{
+			fill:#7b7b7b;
+		}
+		.cls-7{
+			fill:#a0a0a0;
+		}
+	</style>
 	</defs>
 	<g id="Layer_2" data-name="Layer 2">
 		<g id="final-logo">
