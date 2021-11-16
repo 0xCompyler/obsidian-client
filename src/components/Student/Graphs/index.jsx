@@ -59,16 +59,16 @@ const Graph1 = () => {
 	const data = {
 		labels: ["January", "February", "March", "April", 'May', 'June', 'August', 'September'],
 		datasets: [{
-			label: "Lost",
-			data: [45, 25, 40, 20, 60, 20, 35, 25],
+			label: "Present",
+			data: [12,13,10],
 			backgroundColor: "#0d6efd",
 			borderColor: 'transparent',
 			borderWidth: 2.5,
 			barPercentage: 1,
 		}, {
-			label: "Success",
+			label: "Absent",
 			startAngle: 2,
-			data: [20, 40, 20, 50, 25, 40, 25, 10],
+			data: [2,1,3],
 			backgroundColor: "#dc3545",
 			borderColor: 'transparent',
 			borderWidth: 2.5,
@@ -167,9 +167,9 @@ const Graphs = () => {
 				<GraphContainer>
 					<Graph1/>
 				</GraphContainer>
-				<GraphContainer>
+				{/* <GraphContainer>
 					<Graph2/>
-				</GraphContainer>
+				</GraphContainer> */}
 			</Wrapper>
 		</Container>
 	)

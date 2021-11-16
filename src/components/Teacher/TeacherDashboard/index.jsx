@@ -472,9 +472,9 @@ const TeacherDashboard = (props) => {
 							<Route path="/teacher/upload">
 								<Upload />
 							</Route>
-							<Route path="/teacher/meet">
+							{/* <Route path="/teacher/meet">
 								<Meet/>
-							</Route>
+							</Route> */}
 							<Route path="/teacher/">
 								<TeacherDashboardContent history={props.history}/>
 							</Route>

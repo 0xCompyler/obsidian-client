@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useContext,useEffect,useState} from 'react';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -8,53 +8,71 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import { createMuiTheme } from '@material-ui/core';
 import { ThemeProvider } from "@material-ui/styles";
-
-
-const columns = [
-	{
-		id: 'name',
-		label: 'Name',
-		minWidth: 170
-	},
-	{
-		id: 'time',
-		label: 'Date Submitted',
-		minWidth: 100
-	},
-	{
-		id: 'assignment',
-		label: 'Assignment',
-		minWidth: 170,
-	},
-];
-
-function createData(name, description, deadline,) {
-	return {
-		name,
-		description,
-		deadline: <span style={{color:"red"}}>{deadline}</span>,
-	};
-}
-
-const rows = [
-	createData('India', 'IN', 1324171354,),
-	createData('China', 'CN', 1403500365,),
-	createData('Italy', 'IT', 60483973,),
-	createData('United States', 'US', 327167434,),
-	createData('Canada', 'CA', 37602103,),
-	createData('Australia', 'AU', 25475400,),
-	createData('Germany', 'DE', 83019200,),
-	createData('Ireland', 'IE', 4857000,),
-	createData('Mexico', 'MX', 126577691,),
-	createData('Japan', 'JP', 126317000,),
-	createData('France', 'FR', 67022000,),
-	createData('United Kingdom', 'GB', 67545757,),
-	createData('Russia', 'RU', 146793744,),
-	createData('Nigeria', 'NG', 200962417,),
-	createData('Brazil', 'BR', 210147125,),
-];
+import Axios from "axios";
+import UserContext from '@contexts/User/UserContext';
 
 export default function InfoTable() {
+	
+	const { token,user } = useContext(UserContext);
+	const [rows,setRows] = useState([]);
+
+	const columns = [
+		{
+			id: 'name',
+			label: 'Name',
+			minWidth: 170
+		},
+		{
+			id: 'time',
+			label: 'Date Submitted',
+			minWidth: 100
+		},
+		{
+			id: 'assignment',
+			label: 'Assignment',
+			minWidth: 170,
+		},
+		{
+			id:"marks",
+			label:"Marks",
+			minWidth:170
+		}
+	];
+
+	function createData(name,time,assignment,marks) {
+		return {
+			name,
+			time,
+			assignment: <a href={assignment}><span style={{color:"red"}}>Assignment</span></a>,
+			marks
+		};
+	}
+
+	const apiUrl = process.env.REACT_APP_FASTAPI_URL;
+	
+	console.log(user,"user");
+
+	useEffect(() => {
+		Axios.post(`${apiUrl}/assignment/keyword`, {
+			course_code:user.course,
+			assignment_id:"1",
+			keywords: ["how", "are", "you"]
+		}).then((res) => {
+			for(let i=0;i<res.data.length;i++){
+				for(let j=0;j<user.assignments.length;j++){
+					for(let k=0;k<user?.assignments[j]?.assignmentsSubmitted?.length;k++){
+						if(user.assignments[j].assignmentId === "1"){
+							console.log(res.data[i].name,user.assignments[j].assignmentsSubmitted[k].givenBy);
+							if(res.data[i].name === user.assignments[j].assignmentsSubmitted[k].givenBy.toString()){
+								setRows([...rows,createData(res.data[i].name,user.assignments[j].assignmentsSubmitted[k].dateSubmitted,
+								user.assignments[j].assignmentsSubmitted[k].assignment,res.data[i].present)]);
+							}	
+						}
+					}
+				}
+			}
+		})	
+	},[])
 
 	const theme = createMuiTheme({
 		typography:{
@@ -90,13 +108,11 @@ export default function InfoTable() {
 					</TableRow>
 				</TableHead>
 				<TableBody>
-					{rows
-					.map((row) => {
+					{rows.length !== 0 ? rows.map((row) => {
 						return (
 						<TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
 							{columns.map((column) => {
 							const value = row[column.id];
-							console.log(value,"value");
 							return (
 								<TableCell key={column.id} align={column.align}>
 								{column.format && typeof value === 'number'
@@ -107,7 +123,7 @@ export default function InfoTable() {
 							})}
 						</TableRow>
 						);
-					})}
+					}) : <> </>}
 				</TableBody>
 				</Table>
 			</TableContainer>

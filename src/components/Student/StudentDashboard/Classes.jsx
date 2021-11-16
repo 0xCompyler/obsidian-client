@@ -2,15 +2,12 @@ import React,{useState,useEffect} from "react";
 import styled from "styled-components";
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import Axios from "axios";
-import ActivityCard from "./ActivityCard";
-import NoAssignmentsDiagram from "@static/svg/NoAssignmentsDiagram";
 
 const Wrapper = styled.section`
-	display: grid;
-	grid-template-columns: 2fr 1fr;
+	display: flex;
+	flex-direction: column;
 	width: 100%;
 	padding: 2rem;
-	gap: 1rem;
 `
 
 const Heading = styled.h1`
@@ -29,9 +26,9 @@ const CardContainer = styled.a`
 	padding: 1.75rem;
 	background: var(--app-container-bg-primary);
 	border-radius: 0.5rem;
-	gap: 2rem;
-	min-width: 33%;
-	max-width: 50%;
+	gap: 1rem;
+	min-width: 30%;
+	max-width: 30%;
 	cursor: pointer;
 	color: inherit;
 	& > div{
@@ -71,17 +68,9 @@ const CardContainer = styled.a`
 `
 
 const CardWrapper = styled.div`
-	flex: 1;
-	gap: 2rem;
 	display: flex;
+	gap: 2rem;
 	flex-wrap: wrap;
-`
-
-const ClassSection = styled.div`
-`
-
-const ActivitySection = styled.div`
-
 `
 
 const Cards = (props) => {
@@ -101,31 +90,20 @@ const Cards = (props) => {
 	)
 }
 
-
 const Classes = () => {
 	const [courses,setCourses] = useState([]);
-	const [activity, setActivity] = useState([{
-		"score":10,
-		"xp":1,
-	},{
-		"score":20,
-		"xp":2,
-	},{
-		"score":30,
-		"xp":3,
-	}])
 
 	const nodeApiUrl = process.env.REACT_APP_NODE_API_URL;
 
 	useEffect(() => {
 		Axios.get(`${nodeApiUrl}course/getAllCourses`)
 			.then((coursesResponse) => {
-				console.log(coursesResponse,"course");
 				Axios.get(`${nodeApiUrl}course/getDate`)
 				.then((res) => {
 					let upcomingClass = [];
 					coursesResponse.data.response.map((course) => {
 						var currentDate = new Date(res.data.response);
+						console.log(course.from,"course");
 						if(currentDate.getHours() < course.from.substring(0,2)){
 							upcomingClass.push(course);
 						}
@@ -148,36 +126,14 @@ const Classes = () => {
 
 	return (
 		<Wrapper>
-			<ClassSection>
-				<Heading>
-					Upcoming Classes
-				</Heading>
-				<CardWrapper>
-					{courses.length!==0 ? courses.map((item,index)=>(
-						<>
-							<Cards item={item} />
-							<Cards item={item} />
-							<Cards item={item} />
-							<Cards item={item} />
-						</>
-					)) : (
-					<div style={{
-						display: "flex",
-						justifyContent: "center",
-						alignItems: "center",
-						width: "100%",
-						opacity: "0.5"
-					}}>
-						<NoAssignmentsDiagram/>
-					</div>)}
-				</CardWrapper>
-			</ClassSection>
-			<ActivitySection>
-				<Heading>
-					Activity
-				</Heading>
-				<ActivityCard items={activity} />
-			</ActivitySection>
+			<Heading>
+				Upcoming Classes
+			</Heading>
+			<CardWrapper>
+				{courses.map((item,index)=>(
+					<Cards item={item}/>
+				))}
+			</CardWrapper>
 		</Wrapper>
 	)
 }
