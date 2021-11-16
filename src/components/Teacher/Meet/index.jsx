@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Plyr from "plyr-react";
 import "@styles/plyr.css";
+import Funnies from 'funnies';
+import LoadingIcon from "@static/svg/LoadingIcon";
+import { CSSTransitionGroup } from 'react-transition-group'
 
 const Container = styled.div`
 	display: flex;
@@ -58,6 +61,19 @@ const TextInput = styled.input`
 	color: var(--app-text);
 	width: 15rem;
 `;
+
+const Loading = styled.div`
+	font-size: 0.75rem;
+	display:grid;
+	place-items:center;
+	height: 100%;
+	& > div > span {
+		max-width: 4rem;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+`
 
 const ContentWrapper = styled.div`
 	display: grid;
@@ -142,7 +158,24 @@ const Video = React.memo(({ url }) => {
 
 
 const Meet = () => {
+	let funnies = new Funnies();
+	const [loadingMessage, setLoadingMessage] = useState(funnies.message());
 	const [url, setUrl] = useState("https://www.dropbox.com/s/jerz74q64ww9hev/lmaokuchbhi%20on%202021-11-05%2020-28.mp4?raw=1#");
+	const [transcriptionIsLoading, setTranscriptionIsLoading] = useState(true);
+	useEffect(() => {
+		let changeMessage = ""
+		if(transcriptionIsLoading){
+			changeMessage = setInterval(() => {
+				setLoadingMessage(funnies.message())
+			}, 5000);
+		}
+		setTimeout(() => {
+			setTranscriptionIsLoading(false)
+		}, 200000);
+		return ()=> {
+			clearInterval(changeMessage);
+		}
+	}, [])
 	return (
 		<Container>
 			<Heading>Meet Info </Heading>
@@ -154,7 +187,17 @@ const Meet = () => {
 					</VideoSection>
 					<TranscriptSection>
 						<InputLabel>Transcript</InputLabel>
-						<TranscriptContent>"According to all known laws of aviation, there is no way a bee should be able to fly. Its wings are too small to get its fat little body off the ground. The bee, of course, flies anyway because bees don't care what humans think is impossible. Yellow, black. Yellow, black. Yellow, black. Yellow, black. Ooh, black and yellow! Let's shake it up a little. Barry! Breakfast is ready! Ooming! Hang on a second. Hello? - Barry? - Adam? - Oan you believe this is happening? - I can't. I'll pick you up. Looking sharp. Use the stairs. Your father paid good money for those. Sorry. I'm excited. Here's the graduate. We're very proud of you, son. A perfect report card, all B's. Very proud. Ma! I got a thing going here. - You got lint on your fuzz. - Ow! That's me! - Wave to us! We'll be in row 118,000. - Bye! Barry, I told you, stop flying in the house! - Hey, Adam. - Hey, Barry. - Is that fuzz gel? - A little. Special day, graduation. Never thought I'd make it. Three days grade school, three days high school. Those were awkward. Three days college. I'm glad I took a day and hitchhiked around the hive. You did come back different. - Hi, Barry. - Artie, growing a mustache? Looks good. - Hear about Frankie? - Yeah. - You going to the funeral? - No, I'm not going. Everybody knows, sting someone, you die. Don't waste it on a squirrel. Such a hothead. I guess he could have just gotten out of the way. I love this incorporating an amusement park into our day. That's why we don't need vacations. Boy, quite a bit of pomp... under the circumstances. - Well, Adam, today we are men. - We are! - Bee-men."</TranscriptContent>
+						{transcriptionIsLoading ? (
+							<Loading>
+								<div>
+									<LoadingIcon/>
+									<span>{loadingMessage}</span>
+								</div>
+							</Loading>
+							// <>hi</>
+						) :(
+							<TranscriptContent>"According to all known laws of aviation, there is no way a bee should be able to fly. Its wings are too small to get its fat little body off the ground. The bee, of course, flies anyway because bees don't care what humans think is impossible. Yellow, black. Yellow, black. Yellow, black. Yellow, black. Ooh, black and yellow! Let's shake it up a little. Barry! Breakfast is ready! Ooming! Hang on a second. Hello? - Barry? - Adam? - Oan you believe this is happening? - I can't. I'll pick you up. Looking sharp. Use the stairs. Your father paid good money for those. Sorry. I'm excited. Here's the graduate. We're very proud of you, son. A perfect report card, all B's. Very proud. Ma! I got a thing going here. - You got lint on your fuzz. - Ow! That's me! - Wave to us! We'll be in row 118,000. - Bye! Barry, I told you, stop flying in the house! - Hey, Adam. - Hey, Barry. - Is that fuzz gel? - A little. Special day, graduation. Never thought I'd make it. Three days grade school, three days high school. Those were awkward. Three days college. I'm glad I took a day and hitchhiked around the hive. You did come back different. - Hi, Barry. - Artie, growing a mustache? Looks good. - Hear about Frankie? - Yeah. - You going to the funeral? - No, I'm not going. Everybody knows, sting someone, you die. Don't waste it on a squirrel. Such a hothead. I guess he could have just gotten out of the way. I love this incorporating an amusement park into our day. That's why we don't need vacations. Boy, quite a bit of pomp... under the circumstances. - Well, Adam, today we are men. - We are! - Bee-men."</TranscriptContent>
+						)}
 					</TranscriptSection>
 				</ContentWrapper>)}
 				<InputWrapper>

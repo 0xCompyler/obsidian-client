@@ -1,61 +1,43 @@
-import React from "react";
-import styled, { keyframes } from "styled-components";
+import React from 'react'
+import styled, { keyframes } from 'styled-components'
 
-const animateLoadingLogo = keyframes`
-	0% {
-		stroke-dashoffset: 0px;
-		fill: currentColor;
-	}
-	25% {
-		fill: transparent;
-	}
-	50% {
-		fill: transparent;
-	}
-	75%{
-		stroke-width: 2.5px;
-	}
-	90%{
-		stroke-dashoffset: 110px;
-	}
-	100%{
-		stroke-dashoffset: 0px;
-		fill: currentColor;
-		stroke-width: 0;
-	}
-`
-
-const rotateLoadingLogo = keyframes`
-	0% {
+const rotate = keyframes`
+	from{
 		transform: rotate(0deg);
 	}
-	100%{
+	to{
 		transform: rotate(360deg);
 	}
 `
 
-const Wrapper = styled.div`
-	cursor: pointer;
-	display: grid;
-	place-items:center;
-	svg {
-		stroke: currentColor;
-		stroke-width: 2.5px;
-		stroke-dasharray: 50px;
-		stroke-dashoffset: 50px;
-		stroke-linecap: round;
-		stroke-linejoin: round;
-		animation: ${animateLoadingLogo} 1.2s ease infinite, ${rotateLoadingLogo} 1.2s cubic-bezier(0.68, -0.55, 0.51, 1.57) infinite;
-	}
+const SVG = styled.svg`
+	background: transparent;
+	fill: white;
+	animation: ${rotate} 1s linear infinite;
+	margin-right: 0.5rem;
 `
 
-const LoadingIcon = ({ size }) => {
+const LoadingIcon = () => {
 	return (
-		<Wrapper>
-			<svg xmlns="http://www.w3.org/2000/svg" width={size?size:`64`} height={size?size:`64`} viewBox="0 0 100 100">
-				<path d="M50 7C29.554 7 13 23.554 13 44v3c0 3.217 1.358 5.972 3.219 7.875C18.079 56.778 20.417 58 23 58h8v13c0 2.652-1.59 4-4 4-1.284 0-2.549-.911-3.344-2.406a3.006 3.006 0 1 0-5.312 2.812C19.954 78.436 23.057 81 27 81c5.345 0 10-4.342 10-10V58h4v23c0 2.652-1.59 4-4 4-1.153 0-2.234-.463-2.844-1.094a3 3 0 1 0-4.312 4.156C31.749 90.031 34.367 91 37 91c5.345 0 10-4.342 10-10V58h6v23c0 5.658 4.655 10 10 10 2.633 0 5.251-.969 7.156-2.938a3 3 0 1 0-4.312-4.156C65.234 84.536 64.154 85 63 85c-2.41 0-4-1.348-4-4V58h4v13c0 5.658 4.655 10 10 10 3.943 0 7.046-2.564 8.656-5.594a3.006 3.006 0 1 0-5.312-2.812C75.549 74.089 74.284 75 73 75c-2.41 0-4-1.348-4-4V58h8c2.583 0 4.92-1.222 6.781-3.125A11.265 11.265 0 0 0 87 47v-3C87 23.554 70.446 7 50 7zm0 6c17.226 0 31 13.774 31 31v3c0 1.533-.642 2.747-1.531 3.656C78.579 51.566 77.417 52 77 52H23c-.417 0-1.58-.434-2.469-1.344C19.642 49.746 19 48.533 19 47v-3c0-17.226 13.774-31 31-31zM40 33c-4.38 0-8 3.62-8 8a3 3 0 1 0 6 0c0-1.16.84-2 2-2 1.16 0 2 .84 2 2a3 3 0 1 0 6 0c0-4.38-3.62-8-8-8zm20 0c-4.38 0-8 3.62-8 8a3 3 0 1 0 6 0c0-1.16.84-2 2-2 1.16 0 2 .84 2 2a3 3 0 1 0 6 0c0-4.38-3.62-8-8-8z"/>
-			</svg>
-		</Wrapper>
+		<SVG xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 20.2 21.15">
+			<defs>
+				<clipPath id="a" transform="translate(-1.9 -0.94)">
+					<path d="M14.8,4.41l-.27-.11-.11,0A1,1,0,0,1,13.87,3a1,1,0,0,1,1.29-.56l.34.14Z" style={{ fill: "none" }} />
+				</clipPath>
+				<clipPath id="b" transform="translate(-1.9 -0.94)">
+					<path d="M11.64,1.92l.36,0a1,1,0,0,1,1.05,1,1,1,0,0,1-1,1H12l-.29,0Z" style={{ fill: "none" }} />
+				</clipPath>
+			</defs>
+			<g>
+				<g style={{ clipPath: "url(#a)" }}>
+					<image width="23" height="17" transform="translate(8.9 -0.22) scale(0.24)" xlinkHref="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAARCAYAAAA2cze9AAAACXBIWXMAAC4jAAAuIwF4pT92AAAAZ0lEQVQ4T+2T0QqAIAxFz6z//2Afsoe8ZhFFdHvzwNjEcRhDo5TCX6Snhi8M+SVDLgKYdJhvGt8SNWDzJvfkB1zyOEUCsksu+tXYJoddGkAGv7xNDR65dqw668Il73PD8c6XmtvnESuO8Qcw2VptwwAAAABJRU5ErkJggg==" />
+				</g>
+				<image width="86" height="86" transform="translate(-0.22 0.74) scale(0.24)" xlinkHref="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFYAAABWCAYAAABVVmH3AAAACXBIWXMAAC4jAAAuIwF4pT92AAAG5UlEQVR4Xu2cO6jlVBSGv3Pv9TkgNhYiioKFDxQsRawELaxsrCxEEERQREQUESyGQWQQlBEFsVCwsbCxEBEEBd84oJWCKFiIMiIiIz4nsUjWzdprr53XyXkl+SDsPHZy9/nz77XXzjm5izzP2QGkkYvaWlvEQVOFNbMTd7kN2yDsaMTUbELYTQi5APaAM00Vh2KvqcJA5GpZNwuq2HwAnF1TdzBW7dhNCFmHGOmcsvw7VXFZVuXYTbnTsjCLPXZudMZADO3YbRDTQ2Ksx3ll+WfieC+GdOw2i1q3LZxfLoMwlLDbKOoeVQiQz5kSWZdHGIDFkjOvpU5OMNTsao9QXEyp/463DXCanizj2CFFTQ0wy+K1sS406DbsARfQk77CDiHqqsQUMooJgefSVGmfSSyAC+lBH2GXFXWVYnr8Uy7Q7GBpmw4hvdraNcZ2qmzo1cAVIOlVyrVWVNn+hQ50cewYRIUwX20SVbf7IjrQxbGtKyq2SVCPI4Ti2jDgZRU/04K2jh2jqAB/qHUtpKRq3rGLaUEbYccqqnAaf7CyAuvjl9BAk7BjF1X4nbD7WzFlW++/lBqahO3KLooq/KbWddeXbVnX4SJJ3cGubt1lUYVfy9LGWr2uXXuFvYAwlGPHIKog+aru/lrgBbCv1l1SwnZx65hEFX4iHtB0eNDlld4Fhn7QPTZsPNVlrWO9CcLU3aq5jDCuei7Oy/JrfeIyMXbsogL8QCXsPqHIOjxEOs6hoD1erBVzRSazSrcNA1Nwq/AdoVtt2iUiX69Pmh3bnn2qeGrdm2NMagevNo6dkls11xEK6IWCBXASZsd2RSYGQjLl0sK2ceuUSXZ7nEGsa7o11TAA8BWVuBBnCFICcyjoSiqu6hLo7tip46Vcsohrb5KKMMfXtnxOLKjkuAeowa1LKJhyfNVodwqRNl2EnSk4i+JXNrOwA6Ons0mBRdiMkHlQS6O1SQnMAfAv1eAlc2H5MZlsz1R4pov2HVCIJwLq7ED2Zcziatr05tu8Ka0V1+6bOnvEZrTl4XtPf/nXAHXCTIEnLIQzsLfFsSlH6gvMFFhhJVRGjoU4K9DMYSBEJgfy+qikXyJwBpWwVjxvEJspEMfKDEz0CWZjTY7VNp8pEBGtJiJq8KzAvhWtT5rdGrJPNSFIxdrg6ZZeNFm5nGLmzrLU7tQPZWQ9elbgpRF6/9QR4cSxXkawB2GM1YOUxFwtZl3mMBWk++ttbcLDY/rr71PmJFtZxG/8mfhIuYvQgGI0HV8z4A0IQ4F1qRVZLjpV9HikMwPp/odhAOKvv3Us1XFjjrHxQA9V6JR464YCgB/VQf1US7s5By5nWtxDOMZoEXX5ulSwWYEW0BuspvoIUdKpTK0LmSnBVIBC0DPEYUByWVn/lulwL2GXXziL5LCHWGHl3SUtZGqZGtqpIihUYr+mK1thoV5McWyO+Wn4SLmP2JGyrR0bkXpJ+XtCZ1qn6hh8NePk/rLUPRezLtuvYEh9/e3ltKkLjxU9WEE4wxJyOjoWigHKCiqldmxG8aPcMfEgYdizGmjjvYyDF2MFb/DSgxpq/5feBXaUh/BHfG/ASqaeTf8I4htCYQXvTmbADew2D5elPJ+2xoLQrS+RoM6xEF/UCmyPf8Hu8gjhyK/RWYF2cJImYa8iHQ68UAHwWXyZredRwq6vQ4DWSAv6IjU0CQtwTVnaKa7uGlp0gE/YHR4njpf67W6dFQgv0EAbYQGuLUvrVh1vbJj4iO3nibLUotl1OyE4QQu6/IzT6/ay3wosfFgeu5nt4kmqtmpHSq6aU5nO9tRWtHUsFK802kHMiiqlzRo+YHt4irCbW1eSWF8Az9GSpnTL42RZWgd7zrXxNwNuYTMcJQxhtn3egqr3LB3oIywUaVVdg/Qkwoor5a2sh2P4f1+3zxsr9HKcjvQVFoo3SFJ3V3+Q1H4pM+B2huU44d+RZ8x1bbLHZHmGHiwjLMCnhHfeu9teePC6pCx30I/n8a+ntyG+uXZd13maniwrrPAxsZieyFZc74OfMcdkW6aZnnh1i3xA7dpUm2T9GEvSJSuo40bCRlpSH6DumFcXwjxT0zTS20mAPk8fX1pUGE5YKF51TLlByBOlJ4pgt+2N8wRLiSjHwBf9qHtGD4YKBZb3qQ8Hult7ISF39uknTqnzvOvYa9m2ZBS57aCsSljhPeIPlPrAdesA/5Vlk5DezfHEzilmYCth1cIK79IsrBXM20e5TwaiJnEhvL6cK88IVsa6hBXewXdOk+My2oWC1M2S8jHWxLqF1bxF7CbtRs/BEIvlOV7vk28F1somhdW8WZa6i0sJscvrBM2BB9gw2yJsG16lEO3uhnpbwf8w/EPanahJHwAAAABJRU5ErkJggg==" />
+				<g style={{ clipPath: "url(#b)" }}>
+					<image width="22" height="10" transform="translate(8.9 0.74) scale(0.24)" xlinkHref="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAKCAYAAACwoK7bAAAACXBIWXMAAC4jAAAuIwF4pT92AAAANElEQVQoU2P8//8/AxJA4VACWBioaBgyYCKkgFwwajAc0NRgRkKKyAE0czELIQVIgCSfAQANdgUVV7kY8wAAAABJRU5ErkJggg==" />
+				</g>
+			</g>
+		</SVG>
 	)
 }
 
