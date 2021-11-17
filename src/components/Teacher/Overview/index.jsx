@@ -26,7 +26,7 @@ const Container = styled.div`
 	}
 `;
 
-const Quiz = () => {
+const Overview = () => {
 	return (
 		<Container>
 			<InfoTable />
@@ -34,4 +34,4 @@ const Quiz = () => {
 	)
 }
 
-export default Quiz
+export default Overview

@@ -173,35 +173,110 @@ const Video = React.memo(({ url }) => {
 
 
 const Meet = () => {
+
+	const response = [
+		{
+			"filename": "dump/temp.txt"
+		},
+		{
+			"from": 0.88,
+			"to": 1.15,
+			"transcript": "as you order items from Amazon a section on the screens are just other items that might be of interest to you similarly a hundred million choices of Netflix influences among nations for future viewing all this is possible because of availability of data collection systems and improvements in a combination and then I'll go to the net out of fuel we used to deal with the challenges of designing such robust implementation systems one is drive your own team of engineers or data scientists all Heineken in machine learning to custom designed a commendation engines to me don't ",
+			"speaker": 0,
+			"confidence": 0.52,
+			"final": false
+		},
+		{
+			"from": 30.78,
+			"to": 31.29,
+			"transcript": "however this approach is not feasible for smaller companies and startups as it is quite expensive and might not be suitable in the initial stages back of this problem would be to do that it had been a puzzle do not have a machine learning background easily developed and deployed over nation engine in that application apart now let's see there tomorrow Falardeau looks flustered after involved in this study diabetes and would love to eat there as a partnership ",
+			"speaker": 0,
+			"confidence": 0.45,
+			"final": false
+		},
+		{
+			"from": 57.75,
+			"to": 58.1,
+			"transcript": "next we'll have to split their data center group training and validation datasets we'll have to load the data streams into the bit I know about ",
+			"speaker": 2,
+			"confidence": 0.6,
+			"final": false
+		},
+		{
+			"from": 76.04,
+			"to": 76.5,
+			"transcript": "next will play in the market ",
+			"speaker": 2,
+			"confidence": 0.57,
+			"final": false
+		},
+		{
+			"from": 80.69,
+			"to": 80.77,
+			"transcript": "then we would calculate the prediction scores or rankings for you is that I compass ",
+			"speaker": 2,
+			"confidence": 0.58,
+			"final": false
+		},
+		{
+			"from": 85.75,
+			"to": 85.91,
+			"transcript": "we can evaluate the market's performance using the inbuilt evaluate those such as mean average precision the decision of the court ",
+			"speaker": 2,
+			"confidence": 0.58,
+			"final": false
+		},
+		{
+			"from": 95.24,
+			"to": 95.51,
+			"transcript": "once we are satisfied with the motor performance we can save the market as a big looks like ",
+			"speaker": 2,
+			"confidence": 0.59,
+			"final": false
+		},
+		{
+			"from": 101.37,
+			"to": 101.92,
+			"transcript": "lastly we can also save the predictions which which at in form of a bond ester downstream in any format such as CSV escrow I just want ",
+			"speaker": 2,
+			"confidence": 0.56,
+			"final": false
+		}
+	]
+
 	let funnies = new Funnies();
 	const [loadingMessage, setLoadingMessage] = useState(funnies.message());
 	const [url, setUrl] = useState("https://www.dropbox.com/s/jerz74q64ww9hev/lmaokuchbhi%20on%202021-11-05%2020-28.mp4?raw=1#");
-	const [transcriptionIsLoading, setTranscriptionIsLoading] = useState(true);
+	const [transcriptionIsLoading, setTranscriptionIsLoading] = useState(false);
 	const [transcriptionData,setTranscriptionData] = useState("");
 
-	useEffect(() => {
-		let changeMessage = ""
-		if(transcriptionIsLoading){
-			changeMessage = setInterval(() => {
-				setLoadingMessage(funnies.message())
-			}, 5000);
-		}
+	// useEffect(() => {
+	// 	let changeMessage = ""
+	// 	if(transcriptionIsLoading){
+	// 		changeMessage = setInterval(() => {
+	// 			setLoadingMessage(funnies.message())
+	// 		},0);
+	// 	}
 
-		// setTimeout(() => {
-		// 	setTranscriptionIsLoading(false)
-		// }, 200000);
-		return ()=> {
-			clearInterval(changeMessage);
-		}
-	}, [])
+	// 	// setTimeout(() => {
+	// 	// 	setTranscriptionIsLoading(false)
+	// 	// }, 200000);
+
+	// 	return ()=> {
+	// 		clearInterval(changeMessage);
+	// 	}
+	// }, [])
 
 
 	const getTranscription = () => {
-		Axios.post("https://obsidian-server-prod.herokuapp.com/assignment/keyword/transcribe_url",{
-			dropbox_url:url
-		}).then((res) => {
-			setTranscriptionData(res.data);
-		})
+		// Axios.post("https://obsidian-server-prod.herokuapp.com/assignment/keyword/transcribe_url",{
+		// 	dropbox_url:url
+		// }).then((res) => {
+		// 	setTranscriptionData(res.data);
+		// })
+
+		for(let i=1;i<response.data.length;i++){}
+
 	}
 
 	return (
@@ -222,9 +297,21 @@ const Meet = () => {
 									<span>{loadingMessage}</span>
 								</div>
 							</Loading>
-							// <>hi</>
 						) :(
-							<TranscriptContent>"According to all known laws of aviation, there is no way a bee should be able to fly. Its wings are too small to get its fat little body off the ground. The bee, of course, flies anyway because bees don't care what humans think is impossible. Yellow, black. Yellow, black. Yellow, black. Yellow, black. Ooh, black and yellow! Let's shake it up a little. Barry! Breakfast is ready! Ooming! Hang on a second. Hello? - Barry? - Adam? - Oan you believe this is happening? - I can't. I'll pick you up. Looking sharp. Use the stairs. Your father paid good money for those. Sorry. I'm excited. Here's the graduate. We're very proud of you, son. A perfect report card, all B's. Very proud. Ma! I got a thing going here. - You got lint on your fuzz. - Ow! That's me! - Wave to us! We'll be in row 118,000. - Bye! Barry, I told you, stop flying in the house! - Hey, Adam. - Hey, Barry. - Is that fuzz gel? - A little. Special day, graduation. Never thought I'd make it. Three days grade school, three days high school. Those were awkward. Three days college. I'm glad I took a day and hitchhiked around the hive. You did come back different. - Hi, Barry. - Artie, growing a mustache? Looks good. - Hear about Frankie? - Yeah. - You going to the funeral? - No, I'm not going. Everybody knows, sting someone, you die. Don't waste it on a squirrel. Such a hothead. I guess he could have just gotten out of the way. I love this incorporating an amusement park into our day. That's why we don't need vacations. Boy, quite a bit of pomp... under the circumstances. - Well, Adam, today we are men. - We are! - Bee-men."</TranscriptContent>
+							<>
+							{
+								response && response.map((trans,i) => {
+									console.log(trans,"transs")
+									return (
+										<>
+											<TranscriptContent>
+												{i !== 0 ? `${trans.from}-${trans.to} ${trans.transcript}` : ""}
+											</TranscriptContent>
+										</>
+									)
+								})
+							}
+							</>
 						)}
 					</TranscriptSection>
 				</ContentWrapper>)}

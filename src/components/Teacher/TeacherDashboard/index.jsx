@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import TeacherDashboardContent from "../TeacherDashboardContent";
 import Plagiarism from "../Plagiarism";
-import Quiz from "../Quiz";
 import Keywords from "../Keywords";
 import Upload from "../Upload";
 import Meet from "../Meet";
@@ -22,6 +21,7 @@ import MovieCreationIcon from '@material-ui/icons/MovieCreation';
 import { Switch, Route, NavLink } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import UserContext from "../../../contexts/User/UserContext";
+import Overview from "@components/Teacher/Overview";
 
 const Wrapper = styled.div`
 	position: absolute;
@@ -406,6 +406,13 @@ const TeacherDashboard = (props) => {
 						<SidePanelMember
 							exact
 							activeClassName="active"
+							to="/teacher/overview">
+							<StyledQuestionAnswerIcon />
+							Overview
+						</SidePanelMember>
+						<SidePanelMember
+							exact
+							activeClassName="active"
 							to="/teacher">
 							<StyledDashboardIcon />
 							dashboard
@@ -427,13 +434,6 @@ const TeacherDashboard = (props) => {
 						<SidePanelMember
 							exact
 							activeClassName="active"
-							to="/teacher/quiz">
-							<StyledQuestionAnswerIcon />
-							quiz
-						</SidePanelMember>
-						<SidePanelMember
-							exact
-							activeClassName="active"
 							to="/teacher/upload">
 							<StyledUploadIcon />
 							Upload
@@ -448,8 +448,8 @@ const TeacherDashboard = (props) => {
 					</div>
 					<div className="content">
 						<Switch>
-							<Route path="/teacher/quiz">
-								<Quiz />
+							<Route path="/teacher/overview">
+								<Overview />
 							</Route>
 							<Route path="/teacher/keywords">
 								<Keywords />

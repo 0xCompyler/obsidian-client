@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import StudentDashboardContent from "../StudentDashboardContent";
-import Quiz from "../Quiz";
 import Upload from "../Upload";
 // import SearchIcon from '@material-ui/icons/Search';
 import NotificationsIcon from "@material-ui/icons/Notifications";
