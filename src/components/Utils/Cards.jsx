@@ -12,7 +12,7 @@ const CardContainer = styled.div`
 	background: var(--app-container-bg-primary);
 	border-radius: 0.5rem;
 	gap: 1rem;
-	max-width: 30%;
+	max-width: 50%;
 	min-width: 30%;
 	cursor: pointer;
 	& > div{

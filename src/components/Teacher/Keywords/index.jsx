@@ -259,6 +259,7 @@ const StyledInputGroup = styled(InputGroup)`
 const ContentContainer = styled.div`
 	display: flex;
 	align-items:center;
+	flex-wrap: wrap;
 `
 
 const Keywords = () => {
@@ -349,7 +350,8 @@ const Keywords = () => {
 						{result.map((item, index) => (
 							<Card key={index}>
 								<Content>
-									{Object.values(item).filter(elem=>elem.value==="true")?.length!==0&&(
+									{(()=>{console.log(item)})()}
+									{Object.values(item).filter(elem=>elem==="true")?.length!==0&&(
 										<KeywordsContainer
 											noBorderRadius
 											theme="primary">
@@ -367,7 +369,7 @@ const Keywords = () => {
 											</Group>
 										</KeywordsContainer>
 									)}
-									{Object.values(item).filter(elem => elem === "false")?.length !== 0 && (
+									{Object.values(item).filter(elem => elem === "false")?.length !== 0 &&(
 										<KeywordsContainer theme="warning">
 											<PaperIcon />
 											<Group>
