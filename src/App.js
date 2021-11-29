@@ -15,7 +15,7 @@ import {
 	Route,
 } from "react-router-dom";
 import PrivateRoute from "@components/Private";
-import Meet from "@components/Teacher/Meet";
+import Meet from "./Meet";
 
 const App = () => {
 	return (
@@ -51,9 +51,10 @@ const App = () => {
 						exact
 						component={Jitsi}
 					/>
-					<Route
-						path="*"
-						component={NotFound}
+					<Route 
+						path="/meet"
+						exact
+						component={Meet}
 					/>
 				</Switch>
 			</Router>

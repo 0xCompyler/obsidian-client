@@ -3,7 +3,6 @@ import LinkGroups from "@elements/Navbar/LinkGroups";
 import { MenuToggle } from "@elements/Navbar/MenuToggle";
 import SignInBtn from "@elements/Navbar/SignInBtn";
 import LogoIcon from "@static/svg/Logo";
-import constants from "@utils/constants";
 import useIsTabletOrMobile from "@utils/useIsTabletOMobile";
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
@@ -62,7 +61,7 @@ const Navbar = ({ landing }) => {
 		<Nav landing={landing} blur={!isAtTop}>
 			<LogoContainer href="/" ref={logoRef} className="animate-icon">
 				<LogoIcon/>
-				<span>{constants.APP_NAME}</span>
+				<span>Obsidian</span>
 			</LogoContainer>
 			<ContentContainer>
 				{!isTabletOrMobile?(
